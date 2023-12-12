@@ -1,8 +1,21 @@
 <?php
-// Include the database connection file
-include("config.php");
-?>
+    include("config.php");
+    session_start();
+    $status = 0;
+    if (isset($_SESSION["id_user"])){
+      $status = 1;
+      $id = $_SESSION["id_user"];
+      $role = $_SESSION["role"];
 
+      $sql = "SELECT U_Name FROM user where U_ID = '$id'";
+      $result = $db->query($sql);
+
+      // Mengambil data dari hasil query
+      $row = $result->fetch_assoc();
+
+      if ($role == "admn") { $status = 2; }
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,6 +24,7 @@ include("config.php");
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="./source/style-index.css">
+    <script src="./source/modal.js"></script>
   </head>
   <body>
     
@@ -34,26 +48,20 @@ include("config.php");
             <li class="nav-item">
               <a class="nav-link" href="theatre.php">Theater</a>
             </li>
-            
-            <?php  
-                session_start();
-                
-                if(isset($_SESSION["id_user"])){
-                  $id = $_SESSION["id_user"];
-                  $sql = "SELECT U_Name FROM user where U_ID = '$id'";
-                  $result = $db->query($sql);
-
-                  // Mengambil data dari hasil query
-                  $row = $result->fetch_assoc();
-                  echo '<li class="nav-item"><a class="nav-link" href="authenticate.php">' . 'Logout' . '</a></li>';
-                  // Menampilkan data di dalam elemen <p>
-                  echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
-                }else{
-                  echo '<li class="nav-item"><a class="nav-link" href="authenticate.php">' . 'Login' . '</a></li>';
+            <li class="nav-item">
+              <?php  
+                if ($status == 1 or $status == 2){
+                  echo '<a class="nav-link" href="authenticate.php">Logout</a>';
+                } else {
+                  echo '<a class="nav-link" href="authenticate.php">Login</a>';
                 }
-                
+              ?>
+            </li>
+            <?php  
+              if ($status == 1 or $status == 2){
+                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+              }   
             ?>
-            
           </ul>
           
         </div>
@@ -125,7 +133,43 @@ include("config.php");
     </div>
     <div class="main-component  p-4 mb-5">
       <div class="d-flex justify-content-between align-items-center mb-4 px-4">
-        <h3>Shows</h3>
+        <div class="d-flex flex-row gap-3">
+          <h3>Shows</h3>
+          <?php
+          if ($status == 2){
+            echo '<button type="button" class="btn-title" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">+ Add Shows</button>';
+            echo '
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-black" id="exampleModalLabel">Add New Show</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label text-black">Recipient:</label>
+                          <input type="text" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="mb-3">
+                          <label for="message-text " class="col-form-label text-black">Message:</label>
+                          <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Send message</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ';
+          }
+          ?>
+          
+        </div>
         <a href="show.php" style="text-decoration: none;"><h7 style="color: gray">View All</h7></a>
       </div>
       <div class="movie-list">
