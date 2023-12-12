@@ -16,7 +16,6 @@
       if ($role == "admn") { $status = 2; }
     }
 ?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -48,19 +47,19 @@
                 <a class="nav-link" href="theatre.php">Bioskop</a>
               </li>
               <li class="nav-item">
+                <?php  
+                  if ($status == 1 or $status == 2){
+                    echo '<a class="nav-link" href="authenticate.php">Logout</a>';
+                  } else {
+                    echo '<a class="nav-link" href="authenticate.php">Login</a>';
+                  }
+                ?>
+              </li>
               <?php  
-                if ($status == 1 or $status == 2){
-                  echo '<a class="nav-link" href="authenticate.php">Logout</a>';
-                } else {
-                  echo '<a class="nav-link" href="authenticate.php">Login</a>';
-                }
-              ?>
-            </li>
-            <?php  
               if ($status == 1 or $status == 2){
                 echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
               }   
-            ?>
+              ?>
             </ul>
             
           </div>

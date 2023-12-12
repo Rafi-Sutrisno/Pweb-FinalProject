@@ -48,26 +48,19 @@
               <a class="nav-link" href="theatre.php">Bioskop</a>
             </li>
             <li class="nav-item">
-              <?php  
-                if ($status == 1 or $status == 2){
-                  echo '<a class="nav-link" href="authenticate.php">Logout</a>';
-                } else {
-                  echo '<a class="nav-link" href="authenticate.php">Login</a>';
-                }
-              ?>
+              <a class="nav-link" href="authenticate.php">Login</a>
             </li>
-            <?php  
-              if ($status == 1 or $status == 2){
-                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
-              }   
-            ?>
+            <li class="nav-item h-100" style="">
+              <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
+              </div>
+            </li>
           </ul>
           
         </div>
       </div>
     </nav>
 
-    <div class="theater-list d-flex flex-column px-4 mt-5 my-5" style="background-color: black;">
+    <div class="theater-list d-flex flex-column px-4 mt-5 mb-5" style="background-color: black;">
       <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
         <h3>Bioskop</h3>
         
