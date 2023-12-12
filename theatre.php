@@ -15,6 +15,9 @@
 
       if ($role == "admn") { $status = 2; }
     }
+
+    $city = "SELECT * FROM city";
+    $cityResult = $db->query($city)
 ?>
 
 <!doctype html>
@@ -69,9 +72,50 @@
     </nav>
 
     <div class="theater-list d-flex flex-column px-4 mt-5 mb-5" style="background-color: black;">
-      <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+      <div class="d-flex flex-row mb-4 mt-4 gap-3">
         <h3>Bioskop</h3>
-        
+        <?php
+          if ($status == 2){
+            echo '<button type="button" class="btn-title" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">+ Add Bioskop</button>';
+          }
+        ?>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-black" id="exampleModalLabel">Add New Bioskop</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="form-movies" action="handle-bioskop.php" method="POST" enctype="multipart/form-data">
+                  <fieldset class="d-flex flex-column gap-2 mb-3">
+                      <label for="Nama" class="text-dark">Nama</label>
+                      <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="nama" id="nama" placeholder="bioskop name">
+                      
+                      <label for="address" class="text-dark">Address</label>
+                      <textarea class="px-2 py-2 rounded-3 bg-dark" name="address" id="address" placeholder="bioskop address"></textarea>
+                      
+                      <label for="phone" class="text-dark">Phone</label>
+                      <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="phone" id="phone" placeholder="bioskop phone number">
+
+                      <label for="city" class="text-dark">City</label>
+                      <select id="city" name="city" class="bg-dark text-white">
+                        <?php
+                        while ($cityRow = $cityResult->fetch_assoc()) {
+                          echo '<option value="' . $cityRow["CI_ID"] . '">' . $cityRow["CI_Name"] . '</option>';
+                        }
+                        ?>
+                      </select>
+                  </fieldset>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <a href="#" class="" target="_blank">
+                    <button class="btn btn-secondary" type="submit" name="post-bioskop">Add Bioskop</button>
+                  </a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="inner-theater-list d-flex flex-column gap-2">
         <?php 
@@ -87,7 +131,6 @@
                 </a>';
         }
         ?>
-        
       </div>
     </div>
 

@@ -16,6 +16,9 @@
       if ($role == "admn") { $status = 2; }
     }
 
+    $movies = "SELECT * FROM movies";
+    $moviesResult = $db->query($movies);
+
     
 ?>
 
@@ -72,6 +75,7 @@
 
     <div class="container-xxl p-4 my-5" style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
+        <div class="d-flex flex-column">
         <?php 
             if (isset($_POST['submit'])){
                 $id_bioskop = mysqli_real_escape_string($db, $_POST['id_bioskop']);
@@ -81,14 +85,49 @@
                 $res2 = mysqli_fetch_assoc($result2);
             }
             
-            echo '<div class="d-flex flex-column">
+            echo '
                     <h1>Movie di '.$res['B_Name'].'</h1>
                     <p style="font-weight: smaller; color:gray;">'.$res['B_Address'].'</p>
-                    <h4>'.$res2['CI_Name'].'</h4>
-                  </div>
-                ';
+                    <h4>'.$res2['CI_Name'].'</h4> 
+            ';
 
+            if ($status == 2){
+              echo '<button type="button" class="btn-title" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">+ Add Movie to Bioskop</button>';
+            }
         ?>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-black" id="exampleModalLabel">Add New Movies to Bioskop</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="form-movies" action="handle-dmb.php" method="POST" enctype="multipart/form-data">
+                    <fieldset class="d-flex flex-column gap-2 mb-3">
+                        <?php
+                        echo '<input type="hidden" name="b_id" value="' . $id_bioskop . '">';
+                        ?>
+                        <label for="movies" class="text-dark">Select Movies: </label>
+                        <select id="movie" name="movie" class="bg-dark text-white">
+                          <?php
+                          while ($moviesRow = $moviesResult->fetch_assoc()) {
+                            echo '<option value="' . $moviesRow["M_ID"] . '">' . $moviesRow["M_Title"] . '</option>';
+                          }
+                          ?>
+                        </select>
+                    </fieldset>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="#" class="" target="_blank">
+                      <button class="btn btn-secondary" type="submit" name="post-dmb">Add Movie</button>
+                    </a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p style="font-weight: smaller; color:gray;"></p>
       </div>
         

@@ -18,6 +18,11 @@ body{
     font-size: smaller;
     font-weight: bold;
     border: none;
+    max-width: fit-content;
+}
+
+fieldset input, fieldset textarea{
+    color: white;
 }
 
 .movie-list{
