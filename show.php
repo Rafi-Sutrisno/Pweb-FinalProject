@@ -1,3 +1,8 @@
+<?php
+// Include the database connection file
+include("config.php");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,7 +13,7 @@
     <link rel="stylesheet" href="./source/style-show.css">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5" id="navbar">
       <div class="container-fluid">
         <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/images/smooth.png); background-size: cover;">
         </div>
@@ -31,10 +36,18 @@
             <li class="nav-item">
               <a class="nav-link" href="authenticate.php">Login</a>
             </li>
-            <li class="nav-item h-100" style="">
-              <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
-              </div>
-            </li>
+            <?php  
+                session_start();
+                $id = $_SESSION["id_user"];
+                $sql = "SELECT U_Name FROM user where U_ID = '$id'";
+                $result = $db->query($sql);
+
+                // Mengambil data dari hasil query
+                $row = $result->fetch_assoc();
+
+                // Menampilkan data di dalam elemen <p>
+                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+            ?>
           </ul>
           
         </div>

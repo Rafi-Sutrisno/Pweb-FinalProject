@@ -34,23 +34,26 @@ include("config.php");
             <li class="nav-item">
               <a class="nav-link" href="theatre.php">Theater</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="authenticate.php">Login</a>
-            </li>
+            
             <?php  
-                $sql = "SELECT U_Name FROM user where U_ID = 1";
-                $result = $db->query($sql);
+                session_start();
+                
+                if(isset($_SESSION["id_user"])){
+                  $id = $_SESSION["id_user"];
+                  $sql = "SELECT U_Name FROM user where U_ID = '$id'";
+                  $result = $db->query($sql);
 
-                // Mengambil data dari hasil query
-                $row = $result->fetch_assoc();
-
-                // Menampilkan data di dalam elemen <p>
-                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+                  // Mengambil data dari hasil query
+                  $row = $result->fetch_assoc();
+                  echo '<li class="nav-item"><a class="nav-link" href="authenticate.php">' . 'Logout' . '</a></li>';
+                  // Menampilkan data di dalam elemen <p>
+                  echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+                }else{
+                  echo '<li class="nav-item"><a class="nav-link" href="authenticate.php">' . 'Login' . '</a></li>';
+                }
+                
             ?>
-            <li class="nav-item h-100" style="">
-              <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
-              </div>
-            </li>
+            
           </ul>
           
         </div>
@@ -67,7 +70,7 @@ include("config.php");
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="./source/images/jurassic-1.jpg" class="d-block w-100" alt="...">
+                        <img src="source/images/jurassic-1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>
