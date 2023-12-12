@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style-index.css">
+    <link rel="stylesheet" href="./source/style-index.css">
   </head>
   <body>
     
@@ -13,7 +13,7 @@
       <div class="container-fluid">
         <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/smooth.png); background-size: cover;">
         </div>
-        <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smootch Brains</a>
+        <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smooth Brains</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
