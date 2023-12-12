@@ -94,7 +94,7 @@
         
         <div class="movie-list">
             <?php 
-                $result = mysqli_query($db, "SELECT * FROM Movies, detail_bioskop_movies, bioskop where M_ID = Movies_M_ID and Bioskop_B_ID = '$id_bioskop'");
+                $result = mysqli_query($db, "SELECT * FROM Movies, detail_bioskop_movies where M_ID = Movies_M_ID and Bioskop_B_ID = '$id_bioskop'");
           
                 while($res = mysqli_fetch_assoc($result)){
                   
