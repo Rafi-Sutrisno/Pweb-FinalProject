@@ -82,78 +82,35 @@
       </div>
         
         <div class="movie-list">
-          <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/images/John-Wick-3-Movie-Poster.webp" class="card-img-top" alt="...">
-            <div class="h-100"></div>
-            <div class="card-body">
-              <h5 class="card-title">John Wick : Parabellum</h5>
-              <p class="card-text" style="font-size: smaller; color: lightgray;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                <a href=""><button class="btn-title">Get Ticket</button></a>
-                <p style="height: 10px !important;">⭐ 5.0</p>
+          
+          <?php 
+            $result = mysqli_query($db, "SELECT * FROM Movies");
+          
+            while($res = mysqli_fetch_assoc($result)){
+              
+              echo'
+              <div class="card text-white bg-dark" style="width: 16.5rem;">
+                <img src="./source/images/'.$res['M_Poster'].'" class="card-img-top" alt="...">
+                <div class="h-100"></div>
+                <div class="card-body">
+                  <h5 class="card-title">'.$res['M_Title'].'</h5>
+                  <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
+                  <div style=" display: flex; justify-content: space-between; align-items: center !important;">
+                    <a href="">
+                      <form action="booking.php" method="post" name="booking">
+                        <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
+                        <button type="submit" name="submit" class="btn-title">Get Ticket</button>
+                      </form>
+                    </a>
+                    <p style="height: 10px !important;">⭐ 5.0</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/images/transformer-1.jpg" class="card-img-top" alt="...">
-            <div class="h-100"></div>
-            <div class="card-body">
-              <h5 class="card-title">Transformers</h5>
-              <p class="card-text" style="font-size: smaller; color: lightgray;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                <a href=""><button class="btn-title">Get Ticket</button></a>
-                <p style="height: 10px !important;">⭐ 5.0</p>
-              </div>
-            </div>
-          </div>
-          <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/images/godzilla-1.jpg" class="card-img-top" alt="...">
-            <div class="h-100"></div>
-            <div class="card-body">
-              <h5 class="card-title">King of the Monster</h5>
-              <p class="card-text" style="font-size: smaller; color: lightgray;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                <a href=""><button class="btn-title">Get Ticket</button></a>
-                <p style="height: 10px !important;">⭐ 5.0</p>
-              </div>
-            </div>
-          </div>
-          <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/images/avenger-1.jpg" class="card-img-top" alt="...">
-            <div class="h-100"></div>
-            <div class="card-body">
-              <h5 class="card-title">Avenger : End Game</h5>
-              <p class="card-text" style="font-size: smaller; color: lightgray;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                <a href=""><button class="btn-title">Get Ticket</button></a>
-                <p style="height: 10px !important;">⭐ 5.0</p>
-              </div>
-            </div>
-          </div>
-          <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/images/lincoln-1.jpg" class="card-img-top" alt="...">
-            <div class="h-100"></div>
-            <div class="card-body">
-              <h5 class="card-title">Lincoln</h5>
-              <p class="card-text" style="font-size: smaller; color: lightgray;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                <a href=""><button class="btn-title">Get Ticket</button></a>
-                <p style="height: 10px !important;">⭐ 5.0</p>
-              </div>
-            </div>
-          </div>
-          <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/images/65-1.webp" class="card-img-top" alt="...">
-            <div class="h-100"></div>
-            <div class="card-body">
-              <h5 class="card-title">65</h5>
-              <p class="card-text" style="font-size: smaller; color: lightgray;">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                <a href=""><button class="btn-title">Get Ticket</button></a>
-                <p style="height: 10px !important;">⭐ 5.0</p>
-              </div>
-            </div>
-          </div>
+              ';
+          }?>
+          
+          
+          
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
