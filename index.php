@@ -11,7 +11,7 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
       <div class="container-fluid">
-        <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/smooth.png); background-size: cover;">
+        <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/images/smooth.png); background-size: cover;">
         </div>
         <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smooth Brains</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,13 +24,13 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="show.html">Shows</a>
+              <a class="nav-link" href="show.php">Shows</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="theatre.html">Theater</a>
+              <a class="nav-link" href="theatre.php">Theater</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="authenticate.php">Login</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -115,11 +115,11 @@
     <div class="main-component  p-4 mb-5">
       <div class="d-flex justify-content-between align-items-center mb-4 px-4">
         <h3>Shows</h3>
-        <a href="show.html" style="text-decoration: none;"><h7 style="color: gray">View All</h7></a>
+        <a href="show.php" style="text-decoration: none;"><h7 style="color: gray">View All</h7></a>
       </div>
       <div class="movie-list">
         <div class="card text-white bg-dark" style="width: 16.5rem;">
-          <img src="./source/John-Wick-3-Movie-Poster.webp" class="card-img-top" alt="...">
+          <img src="./source/images/John-Wick-3-Movie-Poster.webp" class="card-img-top" alt="...">
           <div class="h-100"></div>
           <div class="card-body">
             <h5 class="card-title">John Wick : Parabellum</h5>
@@ -131,7 +131,7 @@
           </div>
         </div>
         <div class="card text-white bg-dark" style="width: 16.5rem;">
-          <img src="./source/transformer-1.jpg" class="card-img-top" alt="...">
+          <img src="./source/images/transformer-1.jpg" class="card-img-top" alt="...">
           <div class="h-100"></div>
           <div class="card-body">
             <h5 class="card-title">Transformers</h5>
@@ -143,7 +143,7 @@
           </div>
         </div>
         <div class="card text-white bg-dark" style="width: 16.5rem;">
-          <img src="./source/godzilla-1.jpg" class="card-img-top" alt="...">
+          <img src="./source/images/godzilla-1.jpg" class="card-img-top" alt="...">
           <div class="h-100"></div>
           <div class="card-body">
             <h5 class="card-title">King of the Monster</h5>
@@ -155,7 +155,7 @@
           </div>
         </div>
         <div class="card text-white bg-dark" style="width: 16.5rem;">
-          <img src="./source/avenger-1.jpg" class="card-img-top" alt="...">
+          <img src="./source/images/avenger-1.jpg" class="card-img-top" alt="...">
           <div class="h-100"></div>
           <div class="card-body">
             <h5 class="card-title">Avenger : End Game</h5>
@@ -172,7 +172,7 @@
     <div class="theater-list d-flex flex-column px-4 mb-5">
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h3>Theaters</h3>
-        <a href="theatre.html" style="text-decoration: none;"><h7 style="color: gray">View All</h7></a>
+        <a href="theatre.php" style="text-decoration: none;"><h7 style="color: gray">View All</h7></a>
       </div>
       <div class="inner-theater-list d-flex flex-column gap-2">
         <a href="">

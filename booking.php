@@ -10,7 +10,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <div class="container-fluid">
-          <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/smooth.png); background-size: cover;">
+          <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/images/smooth.png); background-size: cover;">
           </div>
           <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smooth Brains</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,16 +20,16 @@
             <div class="w-100"></div>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-end">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="show.html">Shows</a>
+                <a class="nav-link" href="show.php">Shows</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="theatre.html">Theater</a>
+                <a class="nav-link" href="theatre.php">Theater</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="authenticate.php">Login</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -49,11 +49,11 @@
       </nav>
 
       <div class="cont" style="padding-top: 60px;">
-        <div class="movie-desc" style="background-image: url(./source/john-2.jpg); background-size: cover; filter: drop-shadow(50%);">
+        <div class="movie-desc" style="background-image: url(./source/images/john-2.jpg); background-size: cover; filter: drop-shadow(50%);">
             <div class="gradient py-2">
                 <div class="row px-2">
                     <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
-                      <img src="./source/John-Wick-3-Movie-Poster.webp" alt="" style="height: 300px;">
+                      <img src="./source/images/John-Wick-3-Movie-Poster.webp" alt="" style="height: 300px;">
                     </div>
                     <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
                       <h1>John-Wick-3-Parabellum</h1>

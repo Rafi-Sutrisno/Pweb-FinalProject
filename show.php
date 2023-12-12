@@ -10,7 +10,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
       <div class="container-fluid">
-        <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/smooth.png); background-size: cover;">
+        <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/images/smooth.png); background-size: cover;">
         </div>
         <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smooth Brains</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,16 +20,16 @@
           <div class="w-100"></div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-end">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="show.html">Shows</a>
+              <a class="nav-link" href="show.php">Shows</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="theatre.html">Theater</a>
+              <a class="nav-link" href="theatre.php">Theater</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Login</a>
+              <a class="nav-link" href="authenticate.php">Login</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -64,7 +64,7 @@
         
         <div class="movie-list">
           <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/John-Wick-3-Movie-Poster.webp" class="card-img-top" alt="...">
+            <img src="./source/images/John-Wick-3-Movie-Poster.webp" class="card-img-top" alt="...">
             <div class="h-100"></div>
             <div class="card-body">
               <h5 class="card-title">John Wick : Parabellum</h5>
@@ -76,7 +76,7 @@
             </div>
           </div>
           <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/transformer-1.jpg" class="card-img-top" alt="...">
+            <img src="./source/images/transformer-1.jpg" class="card-img-top" alt="...">
             <div class="h-100"></div>
             <div class="card-body">
               <h5 class="card-title">Transformers</h5>
@@ -88,7 +88,7 @@
             </div>
           </div>
           <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/godzilla-1.jpg" class="card-img-top" alt="...">
+            <img src="./source/images/godzilla-1.jpg" class="card-img-top" alt="...">
             <div class="h-100"></div>
             <div class="card-body">
               <h5 class="card-title">King of the Monster</h5>
@@ -100,7 +100,7 @@
             </div>
           </div>
           <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/avenger-1.jpg" class="card-img-top" alt="...">
+            <img src="./source/images/avenger-1.jpg" class="card-img-top" alt="...">
             <div class="h-100"></div>
             <div class="card-body">
               <h5 class="card-title">Avenger : End Game</h5>
@@ -112,7 +112,7 @@
             </div>
           </div>
           <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/lincoln-1.jpg" class="card-img-top" alt="...">
+            <img src="./source/images/lincoln-1.jpg" class="card-img-top" alt="...">
             <div class="h-100"></div>
             <div class="card-body">
               <h5 class="card-title">Lincoln</h5>
@@ -124,7 +124,7 @@
             </div>
           </div>
           <div class="card text-white bg-dark" style="width: 16.5rem;">
-            <img src="./source/65-1.webp" class="card-img-top" alt="...">
+            <img src="./source/images/65-1.webp" class="card-img-top" alt="...">
             <div class="h-100"></div>
             <div class="card-body">
               <h5 class="card-title">65</h5>
