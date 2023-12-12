@@ -16,7 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js" integrity="sha384-jnyECYBYsio2srkTbkTTdIbbARqAmCmk+eLJF5JW88/fBk7ReH4MfpHchD8fhaLV" crossorigin="anonymous"></script>
 
-    <!-- <script src="./source/ajax.js" defer></script> -->
+    <script src="./source/ajax.js" defer></script>
 </head>
 <body>
     <!--Navigation Bar-->
@@ -34,17 +34,17 @@
         <div id="register" class="d-flex flex-column mx-auto rounded-3 justify-content-start align-items-center mt-lg-5 pt-lg-5">
             <h4>register.</h4>
 
-            <form name="form-regist" action="post-register.php" method="POST" class="mt-lg-5">
+            <form name="form-regist" class="mt-lg-5">
                 <fieldset class="d-flex flex-column gap-2" style="max-width: 250px;">
                     <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="name" id="name" placeholder="name">
                     <input class="px-2 py-2 rounded-3 bg-dark" type="email" name="email" id="email" placeholder="email">
                     <input class="px-2 py-2 rounded-3 bg-dark" type="password" name="password" id="password" placeholder="password">
 
                     <a href="#" class="mt-4" target="_blank">
-                        <button class="btn bg-dark" type="submit" id="register">Register</button>
+                        <button class="btn bg-dark" type="submit" id="register-form">Register</button>
                     </a>
 
-                    <p id="response"></p>
+                    <p id="response" style="font-family: 'Poppins', sans-serif;"></p>
 
                 </fieldset>
             </form>
@@ -54,10 +54,10 @@
         <div id="login" class="d-flex flex-column gap-2  mx-auto rounded-3 justify-content-start align-items-center mt-lg-5 pt-lg-5">
             <h4>login.</h4>
 
-            <form name="form-login" action="" class="mt-lg-5">
+            <form name="form-login" action="post-login.php" method="POST" class="mt-lg-5">
                 <fieldset class="d-flex flex-column gap-2" style="max-width: 250px;">
-                    <input class="px-2 py-2 rounded-3 bg-dark" type="email" name="email" id="email" placeholder="email">
-                    <input class="px-2 py-2 rounded-3 bg-dark" type="password" name="password" id="password" placeholder="password">
+                    <input class="px-2 py-2 rounded-3 bg-dark" type="email" name="email" placeholder="email">
+                    <input class="px-2 py-2 rounded-3 bg-dark" type="password" name="password" placeholder="password">
                     <div class="px-2 py-3 rounded-3 bg-transparent"></div>
 
                     <a href="#" class="mt-4" target="_blank">

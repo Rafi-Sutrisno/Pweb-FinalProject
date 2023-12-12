@@ -1,64 +1,48 @@
-// $(function () {
-//     function sendData($form) {
-//       let data = $(this).serialize();
-//       return $.ajax({
-//         type: $form.attr('method'),
-//         url: $form.attr('action'),
-//         data: data,
-//       });
-//     }
+var inputName = document.getElementById("name");
+var inputEmail = document.getElementById("email");
+var inputPass = document.getElementById("password");
+
+$(document).ready(()=> {
+
+  $("form").validate();
+  $("#register-form").on('click', function(event){
+    event.preventDefault();
+    let name = $("#name").val();
+    let email = $("#email").val();
+    let password = $("#password").val();
+
     
-//     $("form").validate();
-    
-//     $("form").submit(function (e) {
-//         e.preventDefault();
-    
-//         sendData($(this)).done(function(){
-//           $("#container_form").html("<div id='message' style='background-color:linear-gradient(rgb(26, 26, 26) 0%, rgb(0, 0, 0) 100%); text-align:center; color:#FFFFFF;'></div>");
-//           $("#container_form").css({
-//             'height': '85%',
-//             'display': 'flex',
-//             'justify-content': 'center',
-//             'align-items': 'center'
-//           });
-//           $("#message")
-//             .html("<h2>Form Submitted Succesfully</h2>")
-//             .append("<p>We will be in touch soon.</p>")
-//             .hide()
-//             .fadeIn(1500);
-//         });
-//     });
-//   });
+    $.ajax({
+      type: "POST",
 
-  $(document).ready(()=> {
+      url: "post-register.php",
 
-    $("#register").on('click', function(){
-      let name = $("#name").val();
-      let email = $("#email").val();
-      let password = $("#password").val();
-
-      $.ajax({
-        type: "POST",
-
-        url: "post-register.php",
-
-        data: {
-          myName: name,
-          myEmail: email,
-          myPassword: password,
-        },
-
-        success: function(data){
-          let response = JSON.parse(data);
-          
-        },
-
-        error: function(error){
-          console.log(error);
+      data: {
+        myName: name,
+        myEmail: email,
+        myPassword: password,
+      },
+      
+      success: function(data){
+        let response = JSON.parse(data);
+       
+        if (response.status == true){
+          $("#response").text("Success to register.");
+          inputName.value = "";
+          inputEmail.value = "";
+          inputPass.value = "";
+        } else {
+          $("#response").text("Failed to register.");
         }
+        
+      },
 
-      })
+      error: function(error){
+        console.log(error);
+      }
 
     })
-    
+
   })
+  
+})
