@@ -1,0 +1,65 @@
+body{
+    margin: 0;
+    color: white;
+    background-color: black;
+}
+
+/* NAVBAR */
+.navbar{
+    background-color: rgba(0, 0, 0, 0.487) !important;
+    transition: top 0.5s;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+/* TOP CONTAINER */
+
+.btn-title{
+    background-color: #772D8B;
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: white;
+    font-size: smaller;
+    font-weight: bold;
+    border: none;
+}
+
+.carousel-inner{
+    
+    max-height: 470px !important;
+}
+
+.carousel-inner img{
+    height: 450px !important;
+    width: 100% !important;
+    object-fit: fill;
+}
+
+.carousel-caption p{
+    text-align: start;
+}
+
+/* MAIN COMPONENT */
+.main-component{
+    background-color: black;
+}
+.movie-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 27px;
+}
+
+.card{
+    background-color: rgba(124, 124, 124, 0.201) !important;
+}
+
+/* THEATRE LIST */
+
+.theater-item{
+    background-color: rgba(124, 124, 124, 0.201);
+    border-radius: 10px;
+}
+.theater-item:hover{
+    background-color: rgba(124, 124, 124, 0.566);
+}
