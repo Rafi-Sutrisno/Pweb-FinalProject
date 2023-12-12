@@ -20,3 +20,17 @@ body{
 .theater-item:hover{
     background-color: rgba(124, 124, 124, 0.566);
 }
+
+.btn-title{
+    background-color: #772D8B;
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: white;
+    font-size: smaller;
+    font-weight: bold;
+    border: none;
+}
+
+fieldset input, fieldset textarea{
+    color: white;
+}
