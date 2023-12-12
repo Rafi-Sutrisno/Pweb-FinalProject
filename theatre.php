@@ -1,6 +1,20 @@
 <?php
-// Include the database connection file
-include("config.php");
+    include("config.php");
+    session_start();
+    $status = 0;
+    if (isset($_SESSION["id_user"])){
+      $status = 1;
+      $id = $_SESSION["id_user"];
+      $role = $_SESSION["role"];
+
+      $sql = "SELECT U_Name FROM user where U_ID = '$id'";
+      $result = $db->query($sql);
+
+      // Mengambil data dari hasil query
+      $row = $result->fetch_assoc();
+
+      if ($role == "admn") { $status = 2; }
+    }
 ?>
 
 <!doctype html>
@@ -28,25 +42,24 @@ include("config.php");
               <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="show.php">Shows</a>
+              <a class="nav-link" href="show.php">Movies</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="theatre.php">Theater</a>
+              <a class="nav-link" href="theatre.php">Bioskop</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="authenticate.php">Login</a>
+              <?php  
+                if ($status == 1 or $status == 2){
+                  echo '<a class="nav-link" href="authenticate.php">Logout</a>';
+                } else {
+                  echo '<a class="nav-link" href="authenticate.php">Login</a>';
+                }
+              ?>
             </li>
             <?php  
-                session_start();
-                $id = $_SESSION["id_user"];
-                $sql = "SELECT U_Name FROM user where U_ID = '$id'";
-                $result = $db->query($sql);
-
-                // Mengambil data dari hasil query
-                $row = $result->fetch_assoc();
-
-                // Menampilkan data di dalam elemen <p>
+              if ($status == 1 or $status == 2){
                 echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+              }   
             ?>
           </ul>
           
@@ -54,42 +67,26 @@ include("config.php");
       </div>
     </nav>
 
-    <div class="theater-list d-flex flex-column px-4 mt-5 mb-5" style="background-color: black;">
+    <div class="theater-list d-flex flex-column px-4 mt-5 my-5" style="background-color: black;">
       <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-        <h3>Theaters</h3>
+        <h3>Bioskop</h3>
         
       </div>
       <div class="inner-theater-list d-flex flex-column gap-2">
-        <a href="">
-          <div class="theater-item p-2">
-            <h4>Imax Surabaya</h4>
-          </div>
-        </a>
-        <a href="">
-          <div class="theater-item p-2">
-            <h4>2D Surabaya</h4>
-          </div>
-        </a>
-        <a href="">
-          <div class="theater-item p-2">
-            <h4>VIP Surabaya</h4>
-          </div>
-        </a>
-        <a href="">
-          <div class="theater-item p-2">
-            <h4>3D Surabaya</h4>
-          </div>
-        </a>
-        <a href="">
-          <div class="theater-item p-2">
-            <h4>XXI Surabaya</h4>
-          </div>
-        </a>
-        <a href="">
-          <div class="theater-item p-2">
-            <h4>XXI Jakarta</h4>
-          </div>
-        </a>
+        <?php 
+        $result = mysqli_query($db, "SELECT * FROM bioskop");
+        while ($res = mysqli_fetch_assoc($result)) {
+          echo '<a href="">
+                  <form action="theater-movie.php" method="post" name="theater-movie">
+                    <input type="hidden" name="id_bioskop" value="' . $res['B_ID'] . '">
+                    <button type="submit" name="submit" class="theater-item p-2 w-100 text-start" style="color: white; border : 2px solid #772D8B">
+                      <h4>'. $res['B_Name'] .'</h4>
+                    </button>
+                  </form>
+                </a>';
+        }
+        ?>
+        
       </div>
     </div>
 

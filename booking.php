@@ -1,6 +1,20 @@
 <?php
-// Include the database connection file
-include("config.php");
+    include("config.php");
+    session_start();
+    $status = 0;
+    if (isset($_SESSION["id_user"])){
+      $status = 1;
+      $id = $_SESSION["id_user"];
+      $role = $_SESSION["role"];
+
+      $sql = "SELECT U_Name FROM user where U_ID = '$id'";
+      $result = $db->query($sql);
+
+      // Mengambil data dari hasil query
+      $row = $result->fetch_assoc();
+
+      if ($role == "admn") { $status = 2; }
+    }
 ?>
 
 <!doctype html>
@@ -28,26 +42,24 @@ include("config.php");
                 <a class="nav-link active" aria-current="page" href="index.php">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="show.php">Shows</a>
+                <a class="nav-link" href="show.php">Movies</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="theatre.php">Theater</a>
+                <a class="nav-link" href="theatre.php">Bioskop</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="authenticate.php">Login</a>
-              </li>
               <?php  
-                session_start();
-                $id = $_SESSION["id_user"];
-                $sql = "SELECT U_Name FROM user where U_ID = '$id'";
-                $result = $db->query($sql);
-
-                // Mengambil data dari hasil query
-                $row = $result->fetch_assoc();
-
-                // Menampilkan data di dalam elemen <p>
+                if ($status == 1 or $status == 2){
+                  echo '<a class="nav-link" href="authenticate.php">Logout</a>';
+                } else {
+                  echo '<a class="nav-link" href="authenticate.php">Login</a>';
+                }
+              ?>
+            </li>
+            <?php  
+              if ($status == 1 or $status == 2){
                 echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
-                
+              }   
             ?>
             </ul>
             
@@ -55,7 +67,7 @@ include("config.php");
         </div>
       </nav>
 
-      <div class="cont" >
+      <div class="cont my-5" >
         <div class="movie-desc" style="background-image: url(./source/images/john-2.jpg); background-size: cover; filter: drop-shadow(50%);">
             <div class="gradient py-3" style="padding-top: 65px !important;">
                 <div class="row px-2">

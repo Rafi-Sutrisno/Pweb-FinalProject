@@ -43,10 +43,10 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="show.php">Shows</a>
+              <a class="nav-link" href="show.php">Movies</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="theatre.php">Theater</a>
+              <a class="nav-link" href="theatre.php">Bioskop</a>
             </li>
             <li class="nav-item">
               <?php  
@@ -68,7 +68,7 @@
       </div>
     </nav>
     
-    <div class="top-component container-xxl d-flex p-0 mb-5" style="background-color: black;">
+    <div class="top-component container-xxl d-flex p-0 my-5" style="background-color: black;">
       <div class="mycarousel" style="width: 100%;">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">

@@ -15,6 +15,8 @@
 
       if ($role == "admn") { $status = 2; }
     }
+
+    
 ?>
 
 <!doctype html>
@@ -42,7 +44,7 @@
               <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="show.php">Movies</a>
+              <a class="nav-link" href="show.php">Shows</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="theatre.php">Bioskop</a>
@@ -70,15 +72,24 @@
 
     <div class="container-xxl p-4 my-5" style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
-        <h1>All Movies</h1>
+        <?php 
+            if (isset($_POST['submit'])){
+                $id_bioskop = mysqli_real_escape_string($db, $_POST['id_bioskop']);
+                $result = mysqli_query($db, "SELECT B_Name, B_Address, City_CI_ID FROM bioskop where B_ID = '$id_bioskop'");
+                $res = mysqli_fetch_assoc($result);
+                $result2 = mysqli_query($db, "SELECT CI_Name FROM City WHERE CI_ID = {$res['City_CI_ID']}");
+                $res2 = mysqli_fetch_assoc($result2);
+            }
+            
+            echo '<div class="d-flex flex-column">
+                    <h1>Movie di '.$res['B_Name'].'</h1>
+                    <p style="font-weight: smaller; color:gray;">'.$res['B_Address'].'</p>
+                    <h4>'.$res2['CI_Name'].'</h4>
+                  </div>
+                ';
 
-        <select name="" id="" class="p-2 px-3" style="background-color: darkgray; border-radius: 20px;">
-          <option value="">Surabaya</option>
-          <option value="">Jember</option>
-          <option value="">Jakarta</option>
-          <option value="">Sidoarjo</option>
-          <option value="">Malang</option>
-        </select>
+        ?>
+        <p style="font-weight: smaller; color:gray;"></p>
       </div>
         
         <div class="movie-list">
