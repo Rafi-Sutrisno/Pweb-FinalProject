@@ -68,7 +68,7 @@
       </div>
     </nav>
     
-    <div class="top-component container-xxl d-flex p-0 mb-5" style="background-color: black;">
+    <div class="top-component container-xxl d-flex p-0 my-5" style="background-color: black;">
       <div class="mycarousel" style="width: 100%;">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
@@ -143,24 +143,32 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title text-black" id="exampleModalLabel">Add New Show</h5>
+                      <h5 class="modal-title text-black" id="exampleModalLabel">Add New Movies</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form>
-                        <div class="mb-3">
-                          <label for="recipient-name" class="col-form-label text-black">Recipient:</label>
-                          <input type="text" class="form-control" id="recipient-name">
-                        </div>
-                        <div class="mb-3">
-                          <label for="message-text " class="col-form-label text-black">Message:</label>
-                          <textarea class="form-control" id="message-text"></textarea>
-                        </div>
+                      <form id="form-movies" action="handle-movies.php" method="POST" enctype="multipart/form-data">
+                        <fieldset class="d-flex flex-column gap-2 mb-3">
+                            <label for="title" class="text-dark">Title</label>
+                            <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="title" id="title" placeholder="movie title">
+                            
+                            <label for="description" class="text-dark">Description</label>
+                            <textarea class="px-2 py-2 rounded-3 bg-dark" name="description" id="description" placeholder="movie description"></textarea>
+                            
+                            <label for="duration" class="text-dark">Duration</label>
+                            <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="duration" id="duration" placeholder="movie duration">
+
+                            <label for="poster" class="text-dark">Poster</label>
+                            <input class="px-2 py-2 rounded-3 bg-dark" type="file" name="foto-poster" />
+
+                            <label for="bg" class="text-dark">Background</label>
+                            <input class="px-2 py-2 rounded-3 bg-dark" type="file" name="foto-bg" />
+                        </fieldset>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" class="" target="_blank">
+                          <button class="btn btn-secondary" type="submit" name="post-movie">Add Movies</button>
+                        </a>
                       </form>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Send message</button>
                     </div>
                   </div>
                 </div>

@@ -1,3 +1,21 @@
+<?php
+    include("config.php");
+    session_start();
+    $status = 0;
+    if (isset($_SESSION["id_user"])){
+      $status = 1;
+      $id = $_SESSION["id_user"];
+      $role = $_SESSION["role"];
+
+      $sql = "SELECT U_Name FROM user where U_ID = '$id'";
+      $result = $db->query($sql);
+
+      // Mengambil data dari hasil query
+      $row = $result->fetch_assoc();
+
+      if ($role == "admn") { $status = 2; }
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -29,12 +47,19 @@
               <a class="nav-link" href="theatre.php">Theater</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="authenticate.php">Login</a>
-            </li>
-            <li class="nav-item h-100" style="">
-              <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
-              </div>
-            </li>
+                <?php  
+                  if ($status == 1 or $status == 2){
+                    echo '<a class="nav-link" href="authenticate.php">Logout</a>';
+                  } else {
+                    echo '<a class="nav-link" href="authenticate.php">Login</a>';
+                  }
+                ?>
+              </li>
+              <?php  
+              if ($status == 1 or $status == 2){
+                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+              }   
+              ?>
           </ul>
           
         </div>
@@ -42,7 +67,7 @@
     </nav>
 
 
-    <div class="container-xxl p-4" style="background-color: black; color: white;">
+    <div class="container-xxl p-4 my-5" style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
         <h1>Shows</h1>
 
