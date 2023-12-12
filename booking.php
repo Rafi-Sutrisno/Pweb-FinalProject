@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Booking</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="./source/style-booking.css">
   </head>
@@ -31,16 +31,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="authenticate.php">Login</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+              <li class="nav-item h-100" style="">
+                <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
+                </div>
               </li>
             </ul>
             
@@ -48,9 +41,9 @@
         </div>
       </nav>
 
-      <div class="cont" style="padding-top: 60px;">
+      <div class="cont" >
         <div class="movie-desc" style="background-image: url(./source/images/john-2.jpg); background-size: cover; filter: drop-shadow(50%);">
-            <div class="gradient py-2">
+            <div class="gradient py-3" style="padding-top: 65px !important;">
                 <div class="row px-2">
                     <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
                       <img src="./source/images/John-Wick-3-Movie-Poster.webp" alt="" style="height: 300px;">
@@ -71,38 +64,97 @@
             </div>
             
         </div>
-        <div class="book-desc d-flex flex-column align-items-center mb-5 mt-5">
-            <div class="w-100 row" >
-                <div class="show-time col col-lg-6 d-flex justify-content-center">
-                    <div>
-                        <p style="font-weight: bolder;">Jam Tayang</p>
-                        <div class="d-flex gap-2">
-                            <div class="p-1 px-2 time-item">
-                                12.00
-                            </div>
-                            <div class="p-1 px-2 time-item">
-                                15.00
-                            </div>
-                            <div class="p-1 px-2 time-item">
-                                19.00
-                            </div>
-                        </div>
+        <div class="row p-3 my-3" style="background-color: #772d8b4a;">
+          <div class="show-time col col-lg-6 d-flex justify-content-center">
+            <div>
+                <p style="font-weight: bolder;">Jam Tayang</p>
+                <div class="d-flex gap-3">
+                    <div class="p-1 px-2 time-item active-time">
+                        12.00
                     </div>
-                </div>
-                <div class="seat-type col col-lg-6 d-flex justify-content-center" >
-                    <div>
-                        <p style="font-weight: bolder;">Tipe kursi</p>
-                        <select name="" id="" class="py-2 px-3" style="background-color: darkgray; border-radius: 20px;">
-                            <option value="">VIP</option>
-                            <option value="">Regular</option>
-                            <option value="">Deluxe</option>
-                        </select>
+                    <div class="p-1 px-2 time-item">
+                        15.00
+                    </div>
+                    <div class="p-1 px-2 time-item">
+                        19.00
                     </div>
                 </div>
             </div>
+          </div>
+          <div class="seat-type col col-lg-6 d-flex justify-content-center">
+              <div>
+                  <p style="font-weight: bolder;">Tipe Theater</p>
+                  <select name="" id="" class="py-2 px-3" style="background-color:  #772D8B; border-radius: 15px; color: white;">
+                      <option value="">VIP</option>
+                      <option value="">Regular</option>
+                      <option value="">Deluxe</option>
+                  </select>
+              </div>
+          </div>
         </div>
+
+
+        <div class="row mb-5">
+          <div class="col col-lg-3 col-12 p-5 d-flex flex-column gap-2" style="background-color: black">
+            <h4>SmoothBrains Reservation</h4>
+            <p>Jumlah Kursi</p>
+            <select name="" id="" class="py-2 px-2" style="background-color: darkgray; border-radius: 15px;">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <p class="mb-0">Metode Bayar</p>
+            <select name="" id="" class="py-2 px-2" style="background-color: darkgray; border-radius: 15px;">
+              <option value="1">Credit Card</option>
+              <option value="2">Online Transfer</option>
+              <option value="3">G-Cash</option>
+            </select> 
+            <p class="pt-2">Total : </p>
+            
+          
+            <a href=""><button class="btn-title w-100">Purchase</button></a>
+          </div>
+          <div class="col col-lg-9 col-12" style="background: url(./source/images/cinema-1.jpg); background-size: cover; padding: 0;">
+            <div class="w-100 h-100 p-5" style="background-color: rgba(0, 0, 0, 0.811); width: 100% !important; ">
+              <h4>Pilih Bioskop</h4>
+              <div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+    
       
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+      var prevScrollpos = window.pageYOffset;
+      window.onscroll = function() {
+      var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+          document.getElementById("navbar").style.top = "0";
+        } else {
+          document.getElementById("navbar").style.top = "-60px";
+        }
+        prevScrollpos = currentScrollPos;
+      }
+
+        let list = document.querySelectorAll('.time-item');
+
+        for(i = 0; i < list.length; i++){
+            list[i].addEventListener('click', function(){
+                for(j = 0; j < list.length; j++){
+                    list[j].classList.remove('active-time');
+                }
+                this.classList.add('active-time');
+            })
+        }
+    </script>
   </body>
 </html>

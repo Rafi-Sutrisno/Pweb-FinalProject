@@ -1,3 +1,8 @@
+<?php
+// Include the database connection file
+include("config.php");
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,16 +37,19 @@
             <li class="nav-item">
               <a class="nav-link" href="authenticate.php">Login</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
+            <?php  
+                $sql = "SELECT U_Name FROM user where U_ID = 1";
+                $result = $db->query($sql);
+
+                // Mengambil data dari hasil query
+                $row = $result->fetch_assoc();
+
+                // Menampilkan data di dalam elemen <p>
+                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+            ?>
+            <li class="nav-item h-100" style="">
+              <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
+              </div>
             </li>
           </ul>
           
@@ -73,7 +81,7 @@
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="./source/images/avenger-2.jpg" class="d-block w-100" alt="...">
+                        <img src="source/images/avenger-2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>
@@ -87,7 +95,7 @@
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="./source/images/top-mv-3.jpeg" class="d-block w-100" alt="...">
+                        <img src="source/images/top-mv-3.jpeg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>

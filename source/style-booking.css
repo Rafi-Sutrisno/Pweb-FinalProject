@@ -32,4 +32,14 @@ body{
 .time-item{
     border: 2px solid #772D8B;
     border-radius: 15px;
+    cursor: pointer;
+}
+
+.time-item:hover{
+    border: gray 2px solid;
+}
+
+.active-time{
+    background-color: #772D8B;
+    
 }
