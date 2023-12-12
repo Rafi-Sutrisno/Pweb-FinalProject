@@ -15,8 +15,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js" integrity="sha384-jnyECYBYsio2srkTbkTTdIbbARqAmCmk+eLJF5JW88/fBk7ReH4MfpHchD8fhaLV" crossorigin="anonymous"></script>
-
-    <script src="./source/ajax.js" defer></script>
 </head>
 <body>
     <!--Navigation Bar-->
@@ -44,10 +42,10 @@
                         <button class="btn bg-dark" type="submit" id="register-form">Register</button>
                     </a>
 
-                    <p id="response" style="font-family: 'Poppins', sans-serif;"></p>
-
                 </fieldset>
             </form>
+
+            <p id="response" style="font-family: 'Poppins', sans-serif;"></p>
         </div>
 
         <!--Login-->
@@ -69,5 +67,6 @@
         </div>
 
     </div>
+    <script src="./source/ajax.js"></script>
 </body>
 </html>

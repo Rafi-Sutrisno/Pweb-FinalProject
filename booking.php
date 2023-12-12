@@ -10,9 +10,9 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
         <div class="container-fluid">
-          <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/smooth.png); background-size: cover;">
+          <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/images/smooth.png); background-size: cover;">
           </div>
-          <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smootch Brains</a>
+          <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smooth Brains</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -29,7 +29,7 @@
                 <a class="nav-link" href="theatre.php">Theater</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="authenticate.php">Login</a>
               </li>
               <li class="nav-item h-100" style="">
                 <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
