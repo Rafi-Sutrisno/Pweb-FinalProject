@@ -68,7 +68,7 @@
     </nav>
 
 
-    <div class="container-xxl p-4 my-5" style="background-color: black; color: white;">
+    <div class="container-xxl p-4 mb-5" style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
         <h1>All Movies</h1>
 
@@ -106,10 +106,8 @@
                   </div>
                 </div>
               </div>
-              ';
-          }?>
-          
-          
+              ';}
+          ?>
           
         </div>
     </div>
