@@ -59,7 +59,7 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="source/jurassic-1.jpg" class="d-block w-100" alt="...">
+                        <img src="./source/images/jurassic-1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>
@@ -73,7 +73,7 @@
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="source/avenger-2.jpg" class="d-block w-100" alt="...">
+                        <img src="./source/images/avenger-2.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>
@@ -87,7 +87,7 @@
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="source/top-mv-3.jpeg" class="d-block w-100" alt="...">
+                        <img src="./source/images/top-mv-3.jpeg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>
