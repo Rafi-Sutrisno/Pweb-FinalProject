@@ -181,7 +181,8 @@
         <a href="show.php" style="text-decoration: none;"><h7 style="color: gray">View All</h7></a>
       </div>
       <div class="movie-list w-100">
-        <?php $result = mysqli_query($db, "SELECT * FROM Movies");
+        <?php 
+          $result = mysqli_query($db, "SELECT * FROM Movies");
           $i = 4;
           while($i--){
             $res = mysqli_fetch_assoc($result);

@@ -66,7 +66,7 @@
         </div>
       </nav>
 
-      <div class="cont my-5" >
+      <div class="cont " >
         <?php 
           if (isset($_POST['submit'])){
             $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
