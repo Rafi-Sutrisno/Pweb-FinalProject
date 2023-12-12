@@ -67,7 +67,7 @@ include("config.php");
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="source//images/jurassic-1.jpg" class="d-block w-100" alt="...">
+                        <img src="./source/images/jurassic-1.jpg" class="d-block w-100" alt="...">
                         <div class="carousel-caption title h-100 d-flex flex-column justify-content-center" style="max-width: 450px;">
                           <div>
                             <h6 class="d-flex align-items-start">Exclusive on this website</h6>
