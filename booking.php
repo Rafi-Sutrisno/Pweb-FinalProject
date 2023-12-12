@@ -67,28 +67,38 @@
       </nav>
 
       <div class="cont my-5" >
-        <div class="movie-desc" style="background-image: url(./source/images/john-2.jpg); background-size: cover; filter: drop-shadow(50%);">
-            <div class="gradient py-3" style="padding-top: 65px !important;">
-                <div class="row px-2">
-                    <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
-                      <img src="./source/images/John-Wick-3-Movie-Poster.webp" alt="" style="height: 300px;">
-                    </div>
-                    <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
-                      <h1>John-Wick-3-Parabellum</h1>
-                      <p style="font-size: smaller; color: lightgray;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus accusamus voluptate sed reiciendis excepturi.</p>
-                      <p class="m-0">Cast :</p>
-                      <div class="d-flex gap-3">
-                        <p>people</p>
-                        <p>people</p>
-                        <p>people</p>
+        <?php 
+          if (isset($_POST['submit'])){
+            $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
+            $result = mysqli_query($db, "SELECT * FROM movies where M_ID = '$id_movie'");
+            $res = mysqli_fetch_assoc($result);
+          }
+          echo '
+            <div class="movie-desc" style="background-image: url(./source/images/'.$res['M_Background'].'); background-size: cover;">
+                <div class="gradient py-3" style="padding-top: 65px !important;">
+                    <div class="row px-2">
+                        <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
+                          <img src="./source/images/'.$res['M_Poster'].'" alt="" style="height: 300px;">
+                        </div>
+                        <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
+                          <h1>'.$res['M_Title'].'</h1>
+                          <p style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
+                          <p class="m-0">Cast :</p>
+                          <div class="d-flex gap-3">
+                            <p>people</p>
+                            <p>people</p>
+                            <p>people</p>
+                          </div>
+                          <p>'.$res['M_Duration'].' | Genre | '.$res['M_ReleaseDate'].'</p>
+                          <p>⭐ 5.0</p>
+                        </div>
                       </div>
-                      <p>lama tayang | Genre | tahun</p>
-                      <p>⭐ 5.0</p>
-                    </div>
-                  </div>
+                </div> 
             </div>
-            
-        </div>
+          ';
+        ?>
+        
+
         <div class="row p-3 my-3" style="background-color: #772d8b4a;">
           <div class="show-time col col-lg-6 d-flex justify-content-center">
             <div>
