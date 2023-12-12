@@ -47,13 +47,21 @@
             <li class="nav-item">
               <a class="nav-link" href="theatre.php">Bioskop</a>
             </li>
+            
             <li class="nav-item">
-              <a class="nav-link" href="authenticate.php">Login</a>
-            </li>
-            <li class="nav-item h-100" style="">
-              <div style="height: 30px; width: 30px; background-image: url(./source/user.png); background-size: cover; border-radius: 50%;">
-              </div>
-            </li>
+                <?php  
+                  if ($status == 1 or $status == 2){
+                    echo '<a class="nav-link" href="authenticate.php">Logout</a>';
+                  } else {
+                    echo '<a class="nav-link" href="authenticate.php">Login</a>';
+                  }
+                ?>
+              </li>
+              <?php  
+              if ($status == 1 or $status == 2){
+                echo '<li class="nav-item"><a class="nav-link" href="#" style="color:white !important;">' . $row["U_Name"] . '</a></li>';
+              }   
+              ?>
           </ul>
           
         </div>
