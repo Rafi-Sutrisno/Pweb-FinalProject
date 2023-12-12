@@ -1,0 +1,28 @@
+body{
+    background-color: black;
+}
+
+.navbar{
+    background-color: rgba(0, 0, 0, 0.487) !important;
+    transition: top 0.5s;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+.btn-title{
+    background-color: #772D8B;
+    border-radius: 20px;
+    padding: 10px 15px;
+    color: white;
+    font-size: smaller;
+    font-weight: bold;
+    border: none;
+}
+
+.movie-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 27px;
+}

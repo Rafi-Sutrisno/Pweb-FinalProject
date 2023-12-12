@@ -1,0 +1,69 @@
+@font-face {
+    font-family: regular;
+    src: url(./fonts/Fontspring-DEMO-modica-regular.otf);
+}
+
+@font-face {
+    font-family: bold-mod;
+    src: url(./fonts/Fontspring-DEMO-modica-black.otf);
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: bold-mod;
+    z-index: 1;
+    color: white;
+    height: 100vh;
+}
+
+.navbar {
+    height: fit-content;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    background-image: url(./images/smooth.png);
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+.container{
+    max-width: 100%;
+    background-image: linear-gradient(rgb(47, 0, 71) 0%, rgb(0, 0, 0) 100%);
+    height: 100vh;
+}
+
+.bg-dark {
+    background-color: black !important;
+}
+
+#register h4, #login h4 {
+    font-family: regular;
+}
+
+input {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    border: 0;
+}
+
+fieldset label {
+    font-size: 13px;
+}
+
+.btn{
+    color: white;
+    width: 250px;
+    border-radius: 500px ;
+    border: gray 1px solid;
+    padding: 10px 25px;
+    transition: all 0.1s;
+}
