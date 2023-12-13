@@ -158,7 +158,7 @@
           <div class="col col-lg-3 col-12 p-5 d-flex flex-column gap-2" style="background-color: black">
             <h4>SmoothBrains Reservation</h4>
             <p>Jumlah Kursi</p>
-            <select name="" id="" class="py-2 px-2" style="background-color: darkgray; border-radius: 15px;">
+            <select name="" id="chosenNumber" class="py-2 px-2" style="background-color: darkgray; border-radius: 15px;">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -166,20 +166,72 @@
                 <option value="5">5</option>
             </select>
             <p class="mb-0">Metode Bayar</p>
-            <select name="" id="" class="py-2 px-2" style="background-color: darkgray; border-radius: 15px;">
-              <option value="1">Credit Card</option>
-              <option value="2">Online Transfer</option>
-              <option value="3">G-Cash</option>
+            <select name="" id="chosenMethod" class="py-2 px-2" style="background-color: darkgray; border-radius: 15px;">
+              <option value="Credit Card">Credit Card</option>
+              <option value="Online Transfer">Online Transfer</option>
+              <option value="G-Cash">G-Cash</option>
             </select> 
             <p class="pt-2">Total : </p>
             
-          
-            <a href=""><button class="btn-title w-100">Purchase</button></a>
+            <button type="button" id="purchaseBtn" class="btn-title" data-bs-toggle="modal" data-bs-target="#purchaseModal" data-bs-whatever="@mdo">Purchase</button>
+
+              <!-- Post Theatre Modal -->
+              <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Purchase Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body" >
+                    <form id="form-movies" action="handle-theatre.php" method="POST" enctype="multipart/form-data">
+                      <fieldset class="d-flex flex-column gap-2 mb-3">
+                          <label for="nama" class="text-dark">Nama Theatre</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="t_name" id="t_name" readonly>
+
+                          <label for="tipe" class="text-dark">Tipe Theatre</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="theatreType" id="theatreType" readonly>
+                          
+                          <label for="seats" class="text-dark">Harga Satu Tiket</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" name="t_price" id="t_price" readonly>
+                          
+                          <label for="price" class="text-dark">Nama Bioskop</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="b_name" id="b_name" readonly>
+
+                          <label for="price" class="text-dark">Kota</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="ci_name" id="ci_name" readonly>
+
+                          <label for="price" class="text-dark">Jumlah Tiket Yang Dibeli</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="numOfTicket" id="numOfTicket" readonly>
+
+                          <label for="price" class="text-dark">Metode Pembayaran</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="payMethod" id="payMethod" readonly>
+
+                          <label for="price" class="text-dark">Total Harga</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="totalPrice" id="totalPrice" readonly>
+                      </fieldset>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <a href="#" class="" target="_blank">
+                        <button class="btn btn-secondary" type="submit" name="post-theatre">Add Theatre</button>
+                      </a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End of Modal -->
           </div>
+
           <div class="col col-lg-9 col-12" style="background: url(./source/images/cinema-1.jpg); background-size: cover; padding: 0;">
             <div class="w-100 h-100 p-5" style="background-color: rgba(0, 0, 0, 0.811); width: 100% !important; ">
             <!-- From Theatre -->  
             <h4>Pilih Theater</h4>
+            <div class="theatre-info p-2 w-100 mt-3 text-start row">
+              <h5 class="col col-lg-3">Theatre Name</h5>
+              <h5 class="col col-lg-3">Type - Price</h5>
+              <h5 class="col col-lg-3">Bioskop Name</h5>
+              <h5 class="col col-lg-3">City</h5>
+            </div>
               <div id="theatreContainer" class="mt-3 d-flex flex-column gap-3">
                 <?php
                   if($status_retrieve == 'fromTheater'){
@@ -188,9 +240,13 @@
                     while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
                       echo '
                         <div class="theatre p-2 w-100 text-start row">
-                          <h5 class="col col-lg-4">' . $rowTheatre['T_Name'] . '</h5>
-                          <h5 class="col col-lg-4">'.$rowTheatre['B_Name'].'</h5>
-                          <h5 class="col col-lg-4">'.$rowTheatre['CI_Name'].'</h5>
+                          <h5 class="col col-lg-3">' . $rowTheatre['T_Name'] . '</h5>
+                          <div class="col col-lg-3 d-flex flex-row gap-2">
+                            <h5>' . $rowTheatre['T_Type'] . ' - </h5>
+                            <h5>Rp' . $rowTheatre['T_Price'] . '</h5>
+                          </div>
+                          <h5 class="col col-lg-3">'.$rowTheatre['B_Name'].'</h5>
+                          <h5 class="col col-lg-3">'.$rowTheatre['CI_Name'].'</h5>
                         </div>
                       ';
                     }
@@ -199,10 +255,14 @@
                     $getTheatre = mysqli_query($db, "SELECT * FROM theatre, bioskop, city where Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and Movies_M_ID = '$id_movie' ");
                     while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
                       echo '
-                        <div class="theatre p-2 w-100 text-start row">
-                          <h5 class="col col-lg-4">' . $rowTheatre['T_Name'] . '</h5>
-                          <h5 class="col col-lg-4">'.$rowTheatre['B_Name'].'</h5>
-                          <h5 class="col col-lg-4">'.$rowTheatre['CI_Name'].'</h5>
+                        <div class="theatre p-2 w-100 text-start row ">
+                          <h5 class="col col-lg-3">' . $rowTheatre['T_Name'] . '</h5>
+                          <div class="col col-lg-3 d-flex flex-row gap-2">
+                            <h5>' . $rowTheatre['T_Type'] . ' - </h5>
+                            <h5>Rp' . $rowTheatre['T_Price'] . '</h5>
+                          </div>
+                          <h5 class="col col-lg-3">'.$rowTheatre['B_Name'].'</h5>
+                          <h5 class="col col-lg-3">'.$rowTheatre['CI_Name'].'</h5>
                         </div>
                       ';
                     }
@@ -211,9 +271,13 @@
                     while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
                       echo '
                         <div class="theatre p-2 w-100 text-start row">
-                          <h5 class="col col-lg-4">' . $rowTheatre['T_Name'] . '</h5>
-                          <h5 class="col col-lg-4">'.$rowTheatre['B_Name'].'</h5>
-                          <h5 class="col col-lg-4">'.$rowTheatre['CI_Name'].'</h5>
+                          <h5 class="col col-lg-3">' . $rowTheatre['T_Name'] . '</h5>
+                          <div class="col col-lg-3 d-flex flex-row gap-2">
+                            <h5>' . $rowTheatre['T_Type'] . ' - </h5>
+                            <h5>Rp' . $rowTheatre['T_Price'] . '</h5>
+                          </div>
+                          <h5 class="col col-lg-3">'.$rowTheatre['B_Name'].'</h5>
+                          <h5 class="col col-lg-3">'.$rowTheatre['CI_Name'].'</h5>
                         </div>
                       ';
                     }
@@ -254,6 +318,43 @@
           })
       }
 
+      let theatres = document.querySelectorAll('.theatre');
+
+      for(i = 0; i < theatres.length; i++){
+          theatres[i].addEventListener('click', function(){
+              for(j = 0; j < theatres.length; j++){
+                theatres[j].classList.remove('active-theatre');
+              }
+              this.classList.add('active-theatre');
+          })
+      }
+
+      $('#purchaseBtn').on('click', function() {
+        // Gather data from HTML elements
+        var theatreName = $('.active-theatre > h5:nth-child(1)').text();
+        var theatreType = $('.active-theatre > .col h5:nth-child(1)').text();
+        var theatrePrice = $('.active-theatre > .col h5:nth-child(2)').text();
+        var bioskopName = $('.active-theatre h5:nth-child(3)').text();
+        var city = $('.active-theatre > h5:nth-child(4)').text(); 
+        var numTickets = document.getElementById("chosenNumber").value;
+        var method = document.getElementById("chosenMethod").value;
+
+        var intPrice = parseInt(theatrePrice.substring(2));
+        var intNumTickets = parseInt(numTickets);
+        var totalPrice = intPrice * intNumTickets;
+
+        document.getElementById('t_name').value = theatreName;
+        document.getElementById('theatreType').value = theatreType;
+        document.getElementById('t_price').value = theatrePrice;
+        document.getElementById('b_name').value = bioskopName;
+        document.getElementById('ci_name').value = city;
+        document.getElementById('numOfTicket').value = numTickets;
+        document.getElementById('payMethod').value = method;
+        document.getElementById('totalPrice').value = "Rp" + totalPrice;
+
+      })
+
+  
       $(document).ready(function () {
         $('#t_type').change(function () {
           var selectedType = $(this).val();
