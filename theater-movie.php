@@ -218,14 +218,29 @@
             <?php 
               $theaterRes = mysqli_query($db, "SELECT * FROM theatre WHERE Bioskop_B_ID='$id_bioskop'");
               while ($theater = mysqli_fetch_assoc($theaterRes)) {
-                echo '<a href="">
-                      <form action="">
-                        <input type="hidden" name="id_theatre" value="' . $theater['T_ID'] . '">
-                        <button type="submit" name="submit" class="theater-item p-2 w-100 text-start" style="color: white; border : 2px solid #772D8B">
-                          <h4>'. $theater['T_Type'] .'</h4>
-                        </button>
-                      </form>
-                    </a>';
+                $movieID = $theater['Movies_M_ID'];
+                $moviesResult = mysqli_query($db, "SELECT * FROM theatre, movies WHERE Movies_M_ID='$movieID' and M_ID='$movieID'");
+                $getMovie = mysqli_fetch_assoc($moviesResult);
+                echo '
+                  <div class="theatre p-2 w-100 text-start row">
+                    <div class="theatre-div col col-lg-2">
+                      <h4>'. $theater['T_Type'] .'</h4>
+                    </div>
+                    <div class="theatre-div d-flex flex-row gap-2 col col-lg-2">
+                        <img src="./source/images/ticket.png" class="icon"> 
+                        <h4>'. $theater['T_Num_of_seat'] .'</h4>
+                    </div>
+                    <div class="theatre-div d-flex flex-row gap-2 col col-lg-2">
+                        <img src="./source/images/money.png" class="icon"> 
+                        <h4>'. $theater['T_Price'] .'</h4>
+                    </div>
+                    <div class="theatre-div d-flex flex-row gap-2 col col-lg-2">
+                        <img src="./source/images/film-reel.png" class="icon"> 
+                        <h4>'. $getMovie['M_Title'] .'</h4>
+                    </div>
+                  </div>
+                      
+                ';
               }
             ?>
           </div>

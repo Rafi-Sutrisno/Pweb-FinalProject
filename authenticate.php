@@ -53,7 +53,7 @@
         </div>
 
         <!--Login-->
-        <div id="login" class="d-flex flex-column gap-2  mx-auto rounded-3 justify-content-start align-items-center mt-lg-5 pt-lg-5">
+        <div id="login" class="d-flex flex-column gap-2 mx-auto rounded-3 justify-content-start align-items-center mt-lg-5 pt-lg-5">
             <h4>login.</h4>
 
             <form name="form-login" action="post-login.php" method="POST" class="mt-lg-5">
