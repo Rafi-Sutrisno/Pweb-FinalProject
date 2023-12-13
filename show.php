@@ -75,7 +75,7 @@
         if (isset($_GET['selectedValue'])) {
           $selectedValue = $_GET['selectedValue'];
               if($selectedValue == 0){
-
+                echo'<h4>Semua Kota</h4>';
               }else{
                 $result_city = mysqli_query($db, "SELECT * FROM city where CI_ID = $selectedValue");
                 $city = mysqli_fetch_assoc($result_city);
@@ -100,9 +100,7 @@
         <div class="movie-list">
           
           <?php 
-            if (isset($_GET['selectedValue'])) {
-              $selectedValue = $_GET['selectedValue'];
-              if($selectedValue == 0){
+            if (! isset($_GET['selectedValue'])) {
                 $result3 = mysqli_query($db, "SELECT * FROM Movies");
                     while($res3 = mysqli_fetch_assoc($result3)){
                       echo'
@@ -116,7 +114,7 @@
                             <a href="">
                               <form action="booking.php" method="post" name="booking">
                                 <input type="hidden" name="id_movie" value="' . $res3['M_ID'] . '">
-                                <button type="submit" name="submit" class="btn-title">Get Ticket</button>
+                                <button type="submit" name="fromAll" class="btn-title">Get Ticket</button>
                               </form>
                             </a>
                             <p style="height: 10px !important;">⭐ 5.0</p>
@@ -124,30 +122,58 @@
                         </div>
                       </div>
                     ';}
+              
               }else{
-                $result = mysqli_query($db, "SELECT * FROM Movies, Bioskop, detail_bioskop_movies where M_ID = Movies_M_ID and B_ID = Bioskop_B_ID and City_CI_ID = $selectedValue group by M_ID");
-                      while($res = mysqli_fetch_assoc($result)){
-                        echo'
-                        <div class="card text-white bg-dark" style="width: 16.5rem;">
-                          <img src="./source/images/'.$res['M_Poster'].'" class="card-img-top" alt="...">
-                          <div class="h-100"></div>
-                          <div class="card-body">
-                            <h5 class="card-title">'.$res['M_Title'].'</h5>
-                            <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
-                            <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                              <a href="">
-                                <form action="booking.php" method="post" name="booking">
-                                  <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
-                                  <button type="submit" name="submit" class="btn-title">Get Ticket</button>
-                                </form>
-                              </a>
-                              <p style="height: 10px !important;">⭐ 5.0</p>
-                            </div>
-                          </div>
+                $selectedValue = $_GET['selectedValue'];
+                if($selectedValue == 0){
+                  $result3 = mysqli_query($db, "SELECT * FROM Movies");
+                  while($res3 = mysqli_fetch_assoc($result3)){
+                    echo'
+                    <div class="card text-white bg-dark" style="width: 16.5rem;">
+                      <img src="./source/images/'.$res3['M_Poster'].'" class="card-img-top" alt="...">
+                      <div class="h-100"></div>
+                      <div class="card-body">
+                        <h5 class="card-title">'.$res3['M_Title'].'</h5>
+                        <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res3['M_Description'].'</p>
+                        <div style=" display: flex; justify-content: space-between; align-items: center !important;">
+                          <a href="">
+                            <form action="booking.php" method="post" name="booking">
+                              <input type="hidden" name="id_movie" value="' . $res3['M_ID'] . '">
+                              <button type="submit" name="fromAll" class="btn-title">Get Ticket</button>
+                            </form>
+                          </a>
+                          <p style="height: 10px !important;">⭐ 5.0</p>
                         </div>
-                      ';}
+                      </div>
+                    </div>
+                  ';}
+                }else{
+                  $result3 = mysqli_query($db, "SELECT * FROM Movies, Bioskop, detail_bioskop_movies where M_ID = Movies_M_ID and B_ID = Bioskop_B_ID and City_CI_ID = $selectedValue group by M_ID");
+                  while($res3 = mysqli_fetch_assoc($result3)){
+                    echo'
+                    <div class="card text-white bg-dark" style="width: 16.5rem;">
+                      <img src="./source/images/'.$res3['M_Poster'].'" class="card-img-top" alt="...">
+                      <div class="h-100"></div>
+                      <div class="card-body">
+                        <h5 class="card-title">'.$res3['M_Title'].'</h5>
+                        <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res3['M_Description'].'</p>
+                        <div style=" display: flex; justify-content: space-between; align-items: center !important;">
+                          <a href="">
+                            <form action="booking.php" method="post" name="booking">
+                              <input type="hidden" name="id_movie" value="' . $res3['M_ID'] . '">
+                              <input type="hidden" name="id_city" value="'.$res3['City_CI_ID'].'">
+                              <button type="submit" name="fromCity" class="btn-title">Get Ticket</button>
+                            </form>
+                          </a>
+                          <p style="height: 10px !important;">⭐ 5.0</p>
+                        </div>
+                      </div>
+                    </div>
+                  ';}
+                }
+                      
               }
-            }
+            
           ?>
           
         </div>
