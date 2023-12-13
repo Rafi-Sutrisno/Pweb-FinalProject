@@ -181,7 +181,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" >
-                    <form id="form-movies" action="handle-theatre.php" method="POST" enctype="multipart/form-data">
+                    <form id="form-transaksi" action="handle-transaksi.php" method="POST" enctype="multipart/form-data">
                       <fieldset class="d-flex flex-column gap-2 mb-3">
                           <label for="nama" class="text-dark">Nama Theatre</label>
                           <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="t_name" id="t_name" readonly>
@@ -206,10 +206,15 @@
 
                           <label for="price" class="text-dark">Total Harga</label>
                           <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="totalPrice" id="totalPrice" readonly>
+
+                          <?php
+                            echo '<input type="hidden" name="u_id" value="' . $id . '">';
+                            echo '<input type="hidden" name="m_id" value="' . $id_movie . '">';
+                          ?>
                       </fieldset>
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                       <a href="#" class="" target="_blank">
-                        <button class="btn btn-secondary" type="submit" name="post-theatre">Add Theatre</button>
+                        <button class="btn btn-secondary" type="submit" name="post-transaksi">Purchase</button>
                       </a>
                     </form>
                   </div>
@@ -339,9 +344,10 @@
         var intPrice = parseInt(theatrePrice.substring(2));
         var intNumTickets = parseInt(numTickets);
         var totalPrice = intPrice * intNumTickets;
+        var modifiedType = theatreType.replace(/[\s-]/g, '');
 
         document.getElementById('t_name').value = theatreName;
-        document.getElementById('theatreType').value = theatreType;
+        document.getElementById('theatreType').value = modifiedType;
         document.getElementById('t_price').value = theatrePrice;
         document.getElementById('b_name').value = bioskopName;
         document.getElementById('ci_name').value = city;
@@ -369,6 +375,16 @@
             success: function (data) {
               // Update the container with the received divs
               $('#theatreContainer').html(data.join(''));
+              let theatres = document.querySelectorAll('.theatre');
+
+              for(i = 0; i < theatres.length; i++){
+                  theatres[i].addEventListener('click', function(){
+                      for(j = 0; j < theatres.length; j++){
+                        theatres[j].classList.remove('active-theatre');
+                      }
+                      this.classList.add('active-theatre');
+                  })
+              }
             },
             error: function (error) {
               console.error('Ajax request failed:', error);
