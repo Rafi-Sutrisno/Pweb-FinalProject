@@ -2,14 +2,31 @@
 include("config.php");
 $selectedType = $_GET['type'];
 $selectedID = $_GET['idMovie'];
+$get_status = $_GET['status_r'];
+$selectedBioskop = $_GET['idBioskop'];
+$selectedCity = $_GET['idCity'];
 
-$query = "SELECT * FROM theatre WHERE T_Type = '$selectedType' AND Movies_M_ID='$selectedID'";
+$query = null;
+
+if($get_status == 'fromTheater'){
+    $query = "SELECT * from theatre, bioskop, city where Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and T_Type = '$selectedType' AND Movies_M_ID='$selectedID' and Bioskop_B_ID = '$selectedBioskop'";
+} else if($get_status == 'fromAll'){
+    $query = "SELECT * from theatre, bioskop, city where Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and T_Type = '$selectedType' AND Movies_M_ID='$selectedID'";
+} else if($get_status == 'fromCity'){
+    $query = "SELECT * from theatre, bioskop, city where Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and T_Type = '$selectedType' AND Movies_M_ID='$selectedID' and City_CI_ID = '$selectedCity'";
+}
+
 $result = mysqli_query($db, $query);
 
 $divs = [];
 while ($row = mysqli_fetch_assoc($result)) {
     // Depending on your data structure, construct the HTML divs
-    $divs[] = '<div class="theatre p-2 w-100 text-start"><h4>' . $row['T_Name'] . '</h4></div>';
+    $divs[] = '<div class="theatre p-2 w-100 text-start row">
+                    <h5 class="col col-lg-4">' . $row['T_Name'] . '</h5>
+                    <h5 class="col col-lg-4">'.$row['B_Name'].'</h5>
+                    <h5 class="col col-lg-4">'.$row['CI_Name'].'</h5>
+               </div>';
+    
 }
 
 // Send the divs as JSON response
