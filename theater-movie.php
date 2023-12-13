@@ -73,7 +73,7 @@
     </nav>
 
 
-    <div class="container-xxl p-4 my-5" style="background-color: black; color: white;">
+    <div class="container-xxl p-4 " style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
         <div class="d-flex flex-column">
         <?php 
@@ -92,7 +92,7 @@
             ';
 
             if ($status == 2){
-              echo '<button type="button" class="btn-title" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">+ Add Movie to Bioskop</button>';
+              echo '<button type="button" class="btn-title mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">+ Add Movie to Bioskop</button>';
             }
         ?>
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -72,19 +72,22 @@
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
         <h1>All Movies</h1>
 
-        <select name="" id="" class="p-2 px-3" style="background-color: darkgray; border-radius: 20px;">
-          <option value="">Surabaya</option>
-          <option value="">Jember</option>
-          <option value="">Jakarta</option>
-          <option value="">Sidoarjo</option>
-          <option value="">Malang</option>
+        <select name="" id="select-city" class="p-2 px-3" style="background-color: #772D8B; border-radius: 20px; border:none; color: white;">
+          <?php
+          $city = mysqli_query($db, "SELECT * FROM city");
+            while ($city_res = mysqli_fetch_assoc($city)) {
+              echo '<option value="' . $city_res["CI_ID"] . '">' . $city_res["CI_Name"] . '</option>';
+            }
+          ?>
         </select>
       </div>
         
         <div class="movie-list">
           
           <?php 
-            $result = mysqli_query($db, "SELECT * FROM Movies");
+           $city_id = filter_input(INPUT_POST, 'select-city', FILTER_VALIDATE_INT);
+           echo 'test'.$city_id.'test';
+            $result = mysqli_query($db, "SELECT * FROM Movies, detail_bioskop_movies, bioskop where M_ID = Movies_M_ID and Bioskop_B_ID = B_ID and City_CI_ID = '$city_id'");
           
             while($res = mysqli_fetch_assoc($result)){
               

@@ -183,29 +183,36 @@
       <div class="movie-list w-100">
         <?php 
           $result = mysqli_query($db, "SELECT * FROM Movies");
-          $i = 4;
-          while($i--){
-            $res = mysqli_fetch_assoc($result);
-            echo'
-            <div class="card text-white bg-dark" style="width: 16.5rem;">
-              <img src="./source/images/'.$res['M_Poster'].'" class="card-img-top" alt="...">
-              <div class="h-100"></div>
-              <div class="card-body">
-                <h5 class="card-title">'.$res['M_Title'].'</h5>
-                <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
-                <div style=" display: flex; justify-content: space-between; align-items: center !important;">
-                  <a href="">
-                    <form action="booking.php" method="post" name="booking">
-                      <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
-                      <button type="submit" name="submit" class="btn-title">Get Ticket</button>
-                    </form>
-                  </a>
-                  <p style="height: 10px !important;">⭐ 5.0</p>
-                </div>
-              </div>
-            </div>
-            ';
-          }?>
+
+          if (mysqli_num_rows($result) > 0) {
+            $i = 4;
+            while ($i-- && ($res = mysqli_fetch_assoc($result))) {
+                // Process each row as needed
+                echo'
+                  <div class="card text-white bg-dark" style="width: 16.5rem;">
+                    <img src="./source/images/'.$res['M_Poster'].'" class="card-img-top" alt="...">
+                    <div class="h-100"></div>
+                    <div class="card-body">
+                      <h5 class="card-title">'.$res['M_Title'].'</h5>
+                      <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
+                      <div style=" display: flex; justify-content: space-between; align-items: center !important;">
+                        <a href="">
+                          <form action="booking.php" method="post" name="booking">
+                            <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
+                            <button type="submit" name="submit" class="btn-title">Get Ticket</button>
+                          </form>
+                        </a>
+                        <p style="height: 10px !important;">⭐ 5.0</p>
+                      </div>
+                    </div>
+                  </div>
+                  ';
+          }
+          } else {
+              // The result set is empty
+              echo "Belum ada movie yang ditambahkan";
+          }
+          ?>
         
       </div>
     </div>
@@ -218,17 +225,21 @@
       <div class="inner-theater-list d-flex flex-column gap-2">
         <?php 
           $result = mysqli_query($db, "SELECT * FROM Bioskop");
-          $i = 4;
-          while($i--){
-            $res = mysqli_fetch_assoc($result);
-            echo '<a href="">
-                  <form action="theater-movie.php" method="post" name="theater-movie">
-                    <input type="hidden" name="id_bioskop" value="' . $res['B_ID'] . '">
-                    <button type="submit" name="submit" class="theater-item p-2 w-100 text-start" style="color: white; border : 2px solid #772D8B">
-                      <h4>'. $res['B_Name'] .'</h4>
-                    </button>
-                  </form>
-                </a>';
+          if (mysqli_num_rows($result) > 0) {
+            $i = 4;
+            while ($i-- && ($res = mysqli_fetch_assoc($result))) {
+              echo '<a href="">
+                      <form action="theater-movie.php" method="post" name="theater-movie">
+                        <input type="hidden" name="id_bioskop" value="' . $res['B_ID'] . '">
+                        <button type="submit" name="submit" class="theater-item p-2 w-100 text-start" style="color: white; border : 2px solid #772D8B">
+                          <h4>'. $res['B_Name'] .'</h4>
+                        </button>
+                      </form>
+                    </a>';
+            }
+          } else {
+              // The result set is empty
+              echo "Belum ada bioskop yang ditambahkan";
           }
         ?>
         

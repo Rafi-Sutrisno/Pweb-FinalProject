@@ -1,7 +1,7 @@
 <?php
     $server = "localhost"; 
-    $user = "root";
-    $password = "Anaana123";
+    $user = "pmauser";
+    $password = "rafisutrisno";
     $nama_database = "movie_theatre";
 
     $db = mysqli_connect($server, $user, $password, $nama_database);
