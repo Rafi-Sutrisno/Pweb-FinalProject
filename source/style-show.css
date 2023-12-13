@@ -33,5 +33,5 @@ fieldset input, fieldset textarea{
 }
 
 .hider{
-    display: none;
+    display: none !important;
 }

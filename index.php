@@ -68,7 +68,7 @@
       </div>
     </nav>
     
-    <div class="top-component container-xxl d-flex p-0 my-5" style="background-color: black;">
+    <div class="top-component container-xxl d-flex py-5" style="background-color: black; ">
       <div class="mycarousel" style="width: 100%;">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
