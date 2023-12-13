@@ -125,7 +125,7 @@
                       </div>
                     ';}
               }else{
-                $result = mysqli_query($db, "SELECT * FROM Movies, Bioskop, detail_bioskop_movies where M_ID = Movies_M_ID and B_ID = Bioskop_B_ID and City_CI_ID = $selectedValue");
+                $result = mysqli_query($db, "SELECT * FROM Movies, Bioskop, detail_bioskop_movies where M_ID = Movies_M_ID and B_ID = Bioskop_B_ID and City_CI_ID = $selectedValue group by M_ID");
                       while($res = mysqli_fetch_assoc($result)){
                         echo'
                         <div class="card text-white bg-dark" style="width: 16.5rem;">
