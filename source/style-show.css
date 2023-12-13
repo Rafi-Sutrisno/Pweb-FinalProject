@@ -31,3 +31,7 @@ fieldset input, fieldset textarea{
     justify-content: center;
     gap: 27px;
 }
+
+.hider{
+    display: none !important;
+}
