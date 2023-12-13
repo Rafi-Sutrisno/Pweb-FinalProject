@@ -241,7 +241,7 @@
                         <img src="./source/images/money.png" class="icon"> 
                         <h4>'. $theater['T_Price'] .'</h4>
                     </div>
-                    <div class="theatre-div d-flex flex-row gap-2 col col-lg-2">
+                    <div class="theatre-div d-flex flex-row gap-2 col col-lg-4">
                         <img src="./source/images/film-reel.png" class="icon"> 
                         <h4>'. $getMovie['M_Title'] .'</h4>
                     </div>
