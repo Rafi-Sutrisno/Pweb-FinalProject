@@ -46,7 +46,9 @@
             <li class="nav-item">
               <a class="nav-link" href="theatre.php">Bioskop</a>
             </li>
-            
+            <li class="nav-item">
+              <a class="nav-link" style="width:max-content !important;" href="tiket.php">Tiket Anda</a>
+            </li>
             <li class="nav-item">
                 <?php  
                   if ($status == 1 or $status == 2){

@@ -1,0 +1,19 @@
+body{
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+.navbar{
+    background-color: rgba(0, 0, 0, 0.487) !important;
+    transition: top 0.5s;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+.tiket-item{
+    background-color:blue;
+    
+    max-width:700px;
+}
