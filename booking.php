@@ -20,20 +20,25 @@
     $id_bioskop = null;
     $id_movie = null;
     $id_city = null;
+    $status_retrieve = null;
 
     if (isset($_POST['fromTheater'])){
       $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
       $id_bioskop = mysqli_real_escape_string($db, $_POST['id_bioskop']);
+      $status_retrieve = 'fromTheater';
     } else if (isset($_POST['fromAll'])){
       $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
-    } 
+      $status_retrieve = 'fromAll';
+    } else if (isset($_POST['fromCity'])){
+      $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
+      $id_city = mysqli_real_escape_string($db, $_POST['id_city']);
+      $status_retrieve = 'fromCity';
+    }
 
     /* Get Pressed Movie */
     $result = mysqli_query($db, "SELECT * FROM movies where M_ID = '$id_movie'");
     $res = mysqli_fetch_assoc($result);
 
-    /* Get Theatres Query */
-    $getTheatre = mysqli_query($db, "SELECT * FROM theatre where Movies_M_ID = '$id_movie' and Bioskop_B_ID = '$id_bioskop'");
 
 ?>
 <!doctype html>
@@ -174,12 +179,41 @@
             <h4>Pilih Theater</h4>
               <div id="theatreContainer" class="mt-3 d-flex flex-column gap-3">
                 <?php
-                  while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
-                    echo '
-                      <div class="theatre p-2 w-100 text-start">
-                        <h4>' . $rowTheatre['T_Name'] . '</h4>
-                      </div>
-                    ';
+                  if($status_retrieve == 'fromTheater'){
+                    /* Get Theatres Query */
+                    $getTheatre = mysqli_query($db, "SELECT * FROM theatre, bioskop, city where Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and Movies_M_ID = '$id_movie' and Bioskop_B_ID = '$id_bioskop'");
+                    while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
+                      echo '
+                        <div class="theatre p-2 w-100 text-start row">
+                          <h5 class="col col-lg-4">' . $rowTheatre['T_Name'] . '</h5>
+                          <h5 class="col col-lg-4">'.$rowTheatre['B_Name'].'</h5>
+                          <h5 class="col col-lg-4">'.$rowTheatre['CI_Name'].'</h5>
+                        </div>
+                      ';
+                    }
+                  } else if ($status_retrieve == 'fromAll'){
+                    /* Get Theatres Query */
+                    $getTheatre = mysqli_query($db, "SELECT * FROM theatre, bioskop, city where Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and Movies_M_ID = '$id_movie' ");
+                    while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
+                      echo '
+                        <div class="theatre p-2 w-100 text-start row">
+                          <h5 class="col col-lg-4">' . $rowTheatre['T_Name'] . '</h5>
+                          <h5 class="col col-lg-4">'.$rowTheatre['B_Name'].'</h5>
+                          <h5 class="col col-lg-4">'.$rowTheatre['CI_Name'].'</h5>
+                        </div>
+                      ';
+                    }
+                  } else if ($status_retrieve == 'fromCity'){
+                    $getTheatre = mysqli_query($db, "SELECT * FROM theatre, bioskop, city where Movies_M_ID = '$id_movie' and Bioskop_B_ID = B_ID and City_CI_ID = CI_ID and City_CI_ID = '$id_city'");
+                    while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
+                      echo '
+                        <div class="theatre p-2 w-100 text-start row">
+                          <h5 class="col col-lg-4">' . $rowTheatre['T_Name'] . '</h5>
+                          <h5 class="col col-lg-4">'.$rowTheatre['B_Name'].'</h5>
+                          <h5 class="col col-lg-4">'.$rowTheatre['CI_Name'].'</h5>
+                        </div>
+                      ';
+                    }
                   }
                 ?>
               </div>
@@ -221,12 +255,15 @@
         $('#t_type').change(function () {
           var selectedType = $(this).val();
           var selectedID = <?php echo json_encode($id_movie); ?>;
+          var selectedStatus = <?php echo json_encode($status_retrieve); ?>;
+          var selectedBioskop = <?php echo json_encode($id_bioskop); ?>;
+          var selectedCity = <?php echo json_encode($id_city); ?>;
 
           // Make Ajax request to get the corresponding divs
           $.ajax({
             url: 'handle-filtering.php',
             type: 'GET',
-            data: { type: selectedType, idMovie: selectedID},
+            data: { type: selectedType, idMovie: selectedID, status_r: selectedStatus, idBioskop: selectedBioskop, idCity: selectedCity},
             dataType: 'json',
             success: function (data) {
               // Update the container with the received divs
