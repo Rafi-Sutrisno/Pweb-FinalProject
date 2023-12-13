@@ -96,6 +96,7 @@ CREATE TABLE Detail_Movies_Lang (
 
 CREATE TABLE Theatre (
   T_ID int(11) NOT NULL AUTO_INCREMENT,
+  T_Name varchar(20) NOT NULL,
   T_Type varchar(25) NOT NULL,
   T_Num_of_seat int(11) NOT NULL,
   T_Price decimal(10) NOT NULL,
