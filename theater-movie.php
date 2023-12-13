@@ -16,10 +16,17 @@
       if ($role == "admn") { $status = 2; }
     }
 
+    /* Movie List */
+    if (isset($_POST['submit'])){
+        $id_bioskop = mysqli_real_escape_string($db, $_POST['id_bioskop']);
+        $result = mysqli_query($db, "SELECT B_Name, B_Address, City_CI_ID FROM bioskop where B_ID = '$id_bioskop'");
+        $res = mysqli_fetch_assoc($result);
+    }
+    
+    /* POST DMB */
     $movies = "SELECT * FROM movies";
     $moviesResult = $db->query($movies);
 
-    
 ?>
 
 <!doctype html>
@@ -36,7 +43,7 @@
       <div class="container-fluid">
         <div class="mx-1" style="height: 40px; width: 40px; border-radius: 50%; background-image: url(./source/images/smooth.png); background-size: cover;">
         </div>
-        <a class="navbar-brand mx-1" href="#" style="font-weight: bolder;">Smooth Brains</a>
+        <a class="navbar-brand mx-1" href="index.php" style="font-weight: bolder;">Smooth Brains</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -75,26 +82,18 @@
 
     <div class="container-xxl p-4 my-5" style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column w-100 align-items-center justify-content-center">
         <?php 
-            if (isset($_POST['submit'])){
-                $id_bioskop = mysqli_real_escape_string($db, $_POST['id_bioskop']);
-                $result = mysqli_query($db, "SELECT B_Name, B_Address, City_CI_ID FROM bioskop where B_ID = '$id_bioskop'");
-                $res = mysqli_fetch_assoc($result);
-                $result2 = mysqli_query($db, "SELECT CI_Name FROM City WHERE CI_ID = {$res['City_CI_ID']}");
-                $res2 = mysqli_fetch_assoc($result2);
-            }
-            
             echo '
-                    <h1>Movie di '.$res['B_Name'].'</h1>
+                    <h1>Movies in '.$res['B_Name'].'</h1>
                     <p style="font-weight: smaller; color:gray;">'.$res['B_Address'].'</p>
-                    <h4>'.$res2['CI_Name'].'</h4> 
             ';
 
             if ($status == 2){
               echo '<button type="button" class="btn-title" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">+ Add Movie to Bioskop</button>';
             }
         ?>
+          <!-- Post Movie-Bioskop Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -126,6 +125,7 @@
               </div>
             </div>
           </div>
+          <!-- End of Modal -->
         </div>
 
         <p style="font-weight: smaller; color:gray;"></p>
@@ -158,6 +158,77 @@
                 ';}
             ?>
           
+          
+        </div>
+
+        <div class="theater-list d-flex flex-column px-4 mb-5">
+          <div class="d-flex flex-column align-items-center mt-4 mb-4 gap-3">
+            <h3>Theatres</h3>
+            <?php
+              if ($status == 2){
+                echo '<button type="button" class="btn-title" data-bs-toggle="modal" data-bs-target="#theatreModal" data-bs-whatever="@mdo">+ Add Theatre to Bioskop</button>';
+              }
+            ?>
+            <!-- Post Theatre Modal -->
+            <div class="modal fade" id="theatreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-black" id="exampleModalLabel">Add New Theatre</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form id="form-movies" action="handle-theatre.php" method="POST" enctype="multipart/form-data">
+                      <fieldset class="d-flex flex-column gap-2 mb-3">
+                          <label for="tipe" class="text-dark">Tipe Theatre</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="tipe" id="tipe" placeholder="Theatre Type (Imax, Premiere, Regular)">
+                          
+                          <label for="seats" class="text-dark">Jumlah Seats</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" name="seats" id="seats" placeholder="Number of seats"></input>
+                          
+                          <label for="price" class="text-dark">Harga Per Tiket</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="price" id="price" placeholder="bioskop phone number">
+
+                          <?php
+                          echo '<input type="hidden" name="b_id" value="' . $id_bioskop . '">';
+                          ?>
+
+                          <label for="movies-dropdown" class="text-dark">Movies to show:</label>
+                          <select id="movies-id" name="movies-id" class="bg-dark text-white">
+                            <?php
+                              $result = mysqli_query($db, "SELECT * FROM Movies, detail_bioskop_movies where M_ID = Movies_M_ID and Bioskop_B_ID = '$id_bioskop'");
+                              while ($titleRow = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . $titleRow['M_ID'] . '">' . $titleRow['M_Title'] . '</option>';
+                              }
+                            ?>
+                          </select>
+                      </fieldset>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <a href="#" class="" target="_blank">
+                        <button class="btn btn-secondary" type="submit" name="post-theatre">Add Theatre</button>
+                      </a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End of Modal -->
+          </div>
+          <div class="inner-theater-list d-flex flex-column gap-2">
+            <?php 
+              $theaterRes = mysqli_query($db, "SELECT * FROM theatre WHERE Bioskop_B_ID='$id_bioskop'");
+              while ($theater = mysqli_fetch_assoc($theaterRes)) {
+                echo '<a href="">
+                      <form action="">
+                        <input type="hidden" name="id_theatre" value="' . $theater['T_ID'] . '">
+                        <button type="submit" name="submit" class="theater-item p-2 w-100 text-start" style="color: white; border : 2px solid #772D8B">
+                          <h4>'. $theater['T_Type'] .'</h4>
+                        </button>
+                      </form>
+                    </a>';
+              }
+            ?>
+          </div>
           
         </div>
     </div>

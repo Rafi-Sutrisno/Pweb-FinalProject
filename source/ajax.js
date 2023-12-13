@@ -44,5 +44,39 @@ $(document).ready(()=> {
     })
 
   })
+
+  $("#post-dmb").on('click', function(event){
+    event.preventDefault();
+    let b_id = $("#b_id").val();
+    let m_id = $("#movie").val();
+
+    $.ajax({
+      type: "POST",
+
+      url: "handle-dmb.php",
+
+      data: {
+        myB_ID: b_id,
+        myM_ID: m_id,
+      },
+      
+      success: function(data){
+        let response = JSON.parse(data);
+       
+        if (response.status == true){
+          $("#response").text("Success to input movie.");
+        } else {
+          $("#response").text("Failed to input movie.");
+        }
+        
+      },
+
+      error: function(error){
+        console.log(error);
+      }
+
+    })
+
+  })
   
 })
