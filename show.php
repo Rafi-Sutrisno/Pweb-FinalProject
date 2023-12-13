@@ -24,7 +24,6 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="./source/style-show.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5" id="navbar">
@@ -72,11 +71,25 @@
     <div class="container-xxl p-4 mb-5" style="background-color: black; color: white;">
       <div class="d-flex justify-content-between align-items-center mb-5 mt-5">
         <h1>All Movies</h1>
+        <?php 
+        if (isset($_GET['selectedValue'])) {
+          $selectedValue = $_GET['selectedValue'];
+              if($selectedValue == 0){
 
-        <select name="select-city" id="select-city" class="p-2 px-3" style="background-color: #772D8B; border-radius: 20px; border:none; color: white;">
-          <option>All</option>
+              }else{
+                $result_city = mysqli_query($db, "SELECT * FROM city where CI_ID = $selectedValue");
+                $city = mysqli_fetch_assoc($result_city);
+                echo'<h4>'.$city['CI_Name'].'</h4>';
+              }
+        }
+         ?>
+
+        <select onchange="updatePHP()" id="select-city" class="p-2 px-3" style="background-color: #772D8B; border-radius: 20px; border:none; color: white;">
+
           <?php
           $city = mysqli_query($db, "SELECT * FROM city");
+          echo'<option>Pilih Kota</option>';
+            echo'<option value="0">All</option>';
             while ($city_res = mysqli_fetch_assoc($city)) {
               echo '<option value="' . $city_res["CI_ID"] . '">' . $city_res["CI_Name"] . '</option>';
             }
@@ -87,19 +100,22 @@
         <div class="movie-list">
           
           <?php 
-              $result = mysqli_query($db, "SELECT * FROM Movies");
-                    while($res = mysqli_fetch_assoc($result)){
+            if (isset($_GET['selectedValue'])) {
+              $selectedValue = $_GET['selectedValue'];
+              if($selectedValue == 0){
+                $result3 = mysqli_query($db, "SELECT * FROM Movies");
+                    while($res3 = mysqli_fetch_assoc($result3)){
                       echo'
                       <div class="card text-white bg-dark" style="width: 16.5rem;">
-                        <img src="./source/images/'.$res['M_Poster'].'" class="card-img-top" alt="...">
+                        <img src="./source/images/'.$res3['M_Poster'].'" class="card-img-top" alt="...">
                         <div class="h-100"></div>
                         <div class="card-body">
-                          <h5 class="card-title">'.$res['M_Title'].'</h5>
-                          <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
+                          <h5 class="card-title">'.$res3['M_Title'].'</h5>
+                          <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res3['M_Description'].'</p>
                           <div style=" display: flex; justify-content: space-between; align-items: center !important;">
                             <a href="">
                               <form action="booking.php" method="post" name="booking">
-                                <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
+                                <input type="hidden" name="id_movie" value="' . $res3['M_ID'] . '">
                                 <button type="submit" name="submit" class="btn-title">Get Ticket</button>
                               </form>
                             </a>
@@ -108,6 +124,30 @@
                         </div>
                       </div>
                     ';}
+              }else{
+                $result = mysqli_query($db, "SELECT * FROM Movies, Bioskop, detail_bioskop_movies where M_ID = Movies_M_ID and B_ID = Bioskop_B_ID and City_CI_ID = $selectedValue");
+                      while($res = mysqli_fetch_assoc($result)){
+                        echo'
+                        <div class="card text-white bg-dark" style="width: 16.5rem;">
+                          <img src="./source/images/'.$res['M_Poster'].'" class="card-img-top" alt="...">
+                          <div class="h-100"></div>
+                          <div class="card-body">
+                            <h5 class="card-title">'.$res['M_Title'].'</h5>
+                            <p class="card-text" style="font-size: smaller; color: lightgray;">'.$res['M_Description'].'</p>
+                            <div style=" display: flex; justify-content: space-between; align-items: center !important;">
+                              <a href="">
+                                <form action="booking.php" method="post" name="booking">
+                                  <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
+                                  <button type="submit" name="submit" class="btn-title">Get Ticket</button>
+                                </form>
+                              </a>
+                              <p style="height: 10px !important;">⭐ 5.0</p>
+                            </div>
+                          </div>
+                        </div>
+                      ';}
+              }
+            }
           ?>
           
         </div>
@@ -127,23 +167,16 @@
       }
 
       
-      $(document).ready(function () {
-        $('#select-city').change(function () {
-            // Get the selected value
-            var selectedValue = $(this).val();
+      function updatePHP() {
+            // Dapatkan nilai terpilih
+            var selectedValue = document.getElementById('select-city').value;
 
-            // Send an AJAX request to a PHP script
-            $.ajax({
-                type: 'POST',
-                url: window.location.href, // Change this to the actual path of your PHP script
-                data: { selectedValue: selectedValue },
-                success: function (response) {
-                    // Optionally handle the response from the PHP script
-                    console.log(response);
-                }
-            });
-        });
-      });
+            // Lakukan sesuatu dengan nilai terpilih (opsional)
+            console.log("Nilai yang dipilih: " + selectedValue);
+
+            // Perbarui URL halaman dengan nilai terpilih
+            window.location.href = window.location.pathname + '?selectedValue=' + selectedValue;
+        }
     </script>
   </body>
 </html>
