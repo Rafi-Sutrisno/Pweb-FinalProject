@@ -148,7 +148,8 @@
                         <a href="">
                           <form action="booking.php" method="post" name="booking">
                             <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
-                            <button type="submit" name="submit" class="btn-title">Get Ticket</button>
+                            <input type="hidden" name="id_bioskop" value="' . $id_bioskop . '">
+                            <button type="submit" name="fromTheater" class="btn-title">Get Ticket</button>
                           </form>
                         </a>
                         <p style="height: 10px !important;">⭐ 5.0</p>
@@ -180,6 +181,9 @@
                   <div class="modal-body">
                     <form id="form-movies" action="handle-theatre.php" method="POST" enctype="multipart/form-data">
                       <fieldset class="d-flex flex-column gap-2 mb-3">
+                          <label for="nama" class="text-dark">Nama Theatre</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="nama" id="nama" placeholder="Theatre Name">
+
                           <label for="tipe" class="text-dark">Tipe Theatre</label>
                           <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="tipe" id="tipe" placeholder="Theatre Type (Imax, Premiere, Regular)">
                           
@@ -223,6 +227,9 @@
                 $getMovie = mysqli_fetch_assoc($moviesResult);
                 echo '
                   <div class="theatre p-2 w-100 text-start row">
+                    <div class="theatre-div col col-lg-2">
+                      <h4>'. $theater['T_Name'] .'</h4>
+                    </div>
                     <div class="theatre-div col col-lg-2">
                       <h4>'. $theater['T_Type'] .'</h4>
                     </div>

@@ -15,6 +15,26 @@
 
       if ($role == "admn") { $status = 2; }
     }
+
+    /* Retrieve ID Movie*/
+    $id_bioskop = null;
+    $id_movie = null;
+    $id_city = null;
+
+    if (isset($_POST['fromTheater'])){
+      $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
+      $id_bioskop = mysqli_real_escape_string($db, $_POST['id_bioskop']);
+    } else if (isset($_POST['fromAll'])){
+      $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
+    } 
+
+    /* Get Pressed Movie */
+    $result = mysqli_query($db, "SELECT * FROM movies where M_ID = '$id_movie'");
+    $res = mysqli_fetch_assoc($result);
+
+    /* Get Theatres Query */
+    $getTheatre = mysqli_query($db, "SELECT * FROM theatre where Movies_M_ID = '$id_movie' and Bioskop_B_ID = '$id_bioskop'");
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -68,11 +88,7 @@
 
       <div class="cont " >
         <?php 
-          if (isset($_POST['submit'])){
-            $id_movie = mysqli_real_escape_string($db, $_POST['id_movie']);
-            $result = mysqli_query($db, "SELECT * FROM movies where M_ID = '$id_movie'");
-            $res = mysqli_fetch_assoc($result);
-          }
+          
           echo '
             <div class="movie-desc" style="background-image: url(./source/images/'.$res['M_Background'].'); background-size: cover;">
                 <div class="gradient py-3" style="padding-top: 65px !important;">
@@ -119,10 +135,11 @@
           <div class="seat-type col col-lg-6 d-flex justify-content-center">
               <div>
                   <p style="font-weight: bolder;">Tipe Theater</p>
-                  <select name="" id="" class="py-2 px-3" style="background-color:  #772D8B; border-radius: 15px; color: white;">
-                      <option value="">VIP</option>
-                      <option value="">Regular</option>
-                      <option value="">Deluxe</option>
+                  <select name="" id="t_type" class="py-2 px-3" style="background-color:  #772D8B; border-radius: 15px; color: white;">
+                      <option disabled="disabled" selected="selected">Choose Type</option>
+                      <option value="Regular">Regular</option>
+                      <option value="IMAX">IMAX</option>
+                      <option value="Premiere">Premiere</option>
                   </select>
               </div>
           </div>
@@ -153,9 +170,18 @@
           </div>
           <div class="col col-lg-9 col-12" style="background: url(./source/images/cinema-1.jpg); background-size: cover; padding: 0;">
             <div class="w-100 h-100 p-5" style="background-color: rgba(0, 0, 0, 0.811); width: 100% !important; ">
-              <h4>Pilih Bioskop</h4>
-              <div>
-
+            <!-- From Theatre -->  
+            <h4>Pilih Theater</h4>
+              <div id="theatreContainer" class="mt-3 d-flex flex-column gap-3">
+                <?php
+                  while($rowTheatre = mysqli_fetch_assoc($getTheatre)){
+                    echo '
+                      <div class="theatre p-2 w-100 text-start">
+                        <h4>' . $rowTheatre['T_Name'] . '</h4>
+                      </div>
+                    ';
+                  }
+                ?>
               </div>
             </div>
           </div>
@@ -167,7 +193,7 @@
       
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
     <script>
       var prevScrollpos = window.pageYOffset;
       window.onscroll = function() {
@@ -180,16 +206,39 @@
         prevScrollpos = currentScrollPos;
       }
 
-        let list = document.querySelectorAll('.time-item');
+      let list = document.querySelectorAll('.time-item');
 
-        for(i = 0; i < list.length; i++){
-            list[i].addEventListener('click', function(){
-                for(j = 0; j < list.length; j++){
-                    list[j].classList.remove('active-time');
-                }
-                this.classList.add('active-time');
-            })
-        }
+      for(i = 0; i < list.length; i++){
+          list[i].addEventListener('click', function(){
+              for(j = 0; j < list.length; j++){
+                  list[j].classList.remove('active-time');
+              }
+              this.classList.add('active-time');
+          })
+      }
+
+      $(document).ready(function () {
+        $('#t_type').change(function () {
+          var selectedType = $(this).val();
+          var selectedID = <?php echo json_encode($id_movie); ?>;
+
+          // Make Ajax request to get the corresponding divs
+          $.ajax({
+            url: 'handle-filtering.php',
+            type: 'GET',
+            data: { type: selectedType, idMovie: selectedID},
+            dataType: 'json',
+            success: function (data) {
+              // Update the container with the received divs
+              $('#theatreContainer').html(data.join(''));
+            },
+            error: function (error) {
+              console.error('Ajax request failed:', error);
+            }
+          });
+        });
+      });
+      
     </script>
   </body>
 </html>

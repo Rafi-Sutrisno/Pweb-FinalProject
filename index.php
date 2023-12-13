@@ -199,7 +199,7 @@
                         <a href="">
                           <form action="booking.php" method="post" name="booking">
                             <input type="hidden" name="id_movie" value="' . $res['M_ID'] . '">
-                            <button type="submit" name="submit" class="btn-title">Get Ticket</button>
+                            <button type="submit" name="fromAll" class="btn-title">Get Ticket</button>
                           </form>
                         </a>
                         <p style="height: 10px !important;">⭐ 5.0</p>
