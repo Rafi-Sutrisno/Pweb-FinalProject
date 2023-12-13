@@ -20,16 +20,19 @@ $result = mysqli_query($db, $query);
 
 $divs = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    // Depending on your data structure, construct the HTML divs
+    
     $divs[] = '<div class="theatre p-2 w-100 text-start row">
-                    <h5 class="col col-lg-4">' . $row['T_Name'] . '</h5>
-                    <h5 class="col col-lg-4">'.$row['B_Name'].'</h5>
-                    <h5 class="col col-lg-4">'.$row['CI_Name'].'</h5>
+                    <h5 class="col col-lg-3">' . $row['T_Name'] . '</h5>
+                    <div class="col col-lg-3 d-flex flex-row gap-2">
+                            <h5>' . $row['T_Type'] . ' - </h5>
+                            <h5>Rp' . $row['T_Price'] . '</h5>
+                    </div>
+                    <h5 class="col col-lg-3">'.$row['B_Name'].'</h5>
+                    <h5 class="col col-lg-3">'.$row['CI_Name'].'</h5>
                </div>';
     
 }
 
-// Send the divs as JSON response
 header('Content-Type: application/json');
 echo json_encode($divs);
 ?>
