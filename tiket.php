@@ -70,15 +70,44 @@
       </div>
     </nav>
     
-    <div class="container-xxl py-5 d-flex flex-column align-items-center" style="background-color:white;">
-        <div class="d-flex flex-wrap mt-5 tiket-item p-4">
-              <img class="" src="./source/images/godzilla-1.jpg" alt="" style="height:350px; object-fit: contain;">
-              <div class=" d-flex flex-column justify-content-center p-4">
-                <h1>godzilla</h1>
-                <h4>tempatccccccccccccccccccccccccccc</h4>
-              </div>
+    <div class="p-lg-5 p-1 tiketcontainer">
+        <div class="row p-5 m-5 tiket_item">
+          <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
+            <img src="./source/images/godzilla-1.jpg" alt="" style="height: 300px;">
+          </div>
+          <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
+            <h1>gozilla</h1>
+            <p style="font-size: smaller; color: lightgray;">lorem ispu akdhsfh aksdfkj aap ayng ing  laig kasdgu elrung  diugiu ekrjj'</p>
+            <p class="m-0">Cast :</p>
+            <div class="d-flex gap-3">
+              <p>people</p>
+              <p>people</p>
+              <p>people</p>
+            </div>
+            <p>jam | Genre | tanggal</p>
+            <p>⭐ 5.0</p>
+          </div>
+        </div>
+
+        <div class="row p-5 m-5 tiket_item">
+          <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
+            <img src="./source/images/godzilla-1.jpg" alt="" style="height: 300px;">
+          </div>
+          <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
+            <h1>gozilla</h1>
+            <p style="font-size: smaller; color: lightgray;">lorem ispu akdhsfh aksdfkj aap ayng ing  laig kasdgu elrung  diugiu ekrjj'</p>
+            <p class="m-0">Cast :</p>
+            <div class="d-flex gap-3">
+              <p>people</p>
+              <p>people</p>
+              <p>people</p>
+            </div>
+            <p>jam | Genre | tanggal</p>
+            <p>⭐ 5.0</p>
+          </div>
         </div>
     </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>

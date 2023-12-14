@@ -11,9 +11,14 @@ body{
     z-index: 1;
     width: 100%;
 }
-
-.tiket-item{
-    background-color:blue;
+.tiketcontainer{
+    background-color:black; 
     
-    max-width:700px;
+}
+.tiket_item{
+    background-color: aqua;
+    background: url(./images/ticket-clipart.png);
+    background-size: 100%;
+    
+    
 }
