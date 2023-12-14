@@ -15,6 +15,7 @@
 
       if ($role == "admn") { $status = 2; }
     }
+    
 ?>
 
 <!doctype html>
@@ -71,41 +72,68 @@
     </nav>
     
     <div class="p-lg-5 p-1 tiketcontainer">
-        <div class="row p-5 m-5 tiket_item">
-          <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
-            <img src="./source/images/godzilla-1.jpg" alt="" style="height: 300px;">
-          </div>
-          <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
-            <h1>gozilla</h1>
-            <p style="font-size: smaller; color: lightgray;">lorem ispu akdhsfh aksdfkj aap ayng ing  laig kasdgu elrung  diugiu ekrjj'</p>
-            <p class="m-0">Cast :</p>
-            <div class="d-flex gap-3">
-              <p>people</p>
-              <p>people</p>
-              <p>people</p>
-            </div>
-            <p>jam | Genre | tanggal</p>
-            <p>⭐ 5.0</p>
-          </div>
-        </div>
+        <?php 
+          if($status == 1){
+            $result = mysqli_query($db, "SELECT * FROM Transaksi, Movies, Theatre, user where User_U_ID = $id and transaksi.Movies_M_ID = M_ID and Theatre_T_ID = T_ID and User_U_ID = U_ID");
 
-        <div class="row p-5 m-5 tiket_item">
-          <div class="col col-lg-4 col-sm-12 col-12 text-center" style="">
-            <img src="./source/images/godzilla-1.jpg" alt="" style="height: 300px;">
-          </div>
-          <div class="col col-lg-8 col-sm-12 col-12 d-flex flex-column justify-content-center" style="">
-            <h1>gozilla</h1>
-            <p style="font-size: smaller; color: lightgray;">lorem ispu akdhsfh aksdfkj aap ayng ing  laig kasdgu elrung  diugiu ekrjj'</p>
-            <p class="m-0">Cast :</p>
-            <div class="d-flex gap-3">
-              <p>people</p>
-              <p>people</p>
-              <p>people</p>
-            </div>
-            <p>jam | Genre | tanggal</p>
-            <p>⭐ 5.0</p>
-          </div>
-        </div>
+            while($res = mysqli_fetch_assoc($result)){
+              echo '
+              <div class="row p-2 m-5 tiket_item">
+                <div class="col col-lg-4 col-sm-12 col-12 text-center tiket-img">
+                  <img src="./source/images/ticket.png" alt="" style="max-height: 300px;">
+                </div>
+                <div class="col col-lg-8 col-sm-12 col-12 d-flex justify-content-between gap-3 align-items-center px-5 flex-wrap" style="">
+                  <div class="">
+                    <h2>CINEMA</h2>
+                    <h2 style="font-weight:lighter;">TICKET</h2>
+                    <h5>User : '.$res['U_Name'].'</h5>
+                    <div class="inner-tiket">
+                      <p>Tanggal beli : '.$res['TR_Tglbeli'].'</p>
+                      <p>Jumlah kursi : '.$res['TR_Num_of_tickets'].'</p>
+                      <p>Metode Bayar : '.$res['TR_MetodeBayar'].'</p>
+                    </div>
+                    <p>'.$res['M_Title'].' | '.$res['T_Name'].' | tanggal</p>
+                    <p>⭐ 5.0</p>
+                  </div>
+                  <img src="./source/images/qr-code.png" alt="" style="max-height: 250px; background-color:white;">
+                </div>
+              </div>
+              ';
+            }
+          }else if($status == 2){
+            $result = mysqli_query($db, "SELECT * FROM Transaksi, Movies, Theatre, user where transaksi.Movies_M_ID = M_ID and Theatre_T_ID = T_ID and User_U_ID = U_ID");
+
+            while($res = mysqli_fetch_assoc($result)){
+              echo '
+              <div class="row p-2 m-5 tiket_item">
+                <div class="col col-lg-4 col-sm-12 col-12 text-center tiket-img">
+                  <img src="./source/images/ticket.png" alt="" style="max-height: 300px;">
+                </div>
+                <div class="col col-lg-8 col-sm-12 col-12 d-flex justify-content-between gap-3 align-items-center px-5 flex-wrap" style="">
+                  <div class="">
+                    <h2>CINEMA</h2>
+                    <h2 style="font-weight:lighter;">TICKET</h2>
+                    <h5>User : '.$res['U_Name'].'</h5>
+                    <div class="inner-tiket">
+                      <p>Tanggal beli : '.$res['TR_Tglbeli'].'</p>
+                      <p>Jumlah kursi : '.$res['TR_Num_of_tickets'].'</p>
+                      <p>Metode Bayar : '.$res['TR_MetodeBayar'].'</p>
+                    </div>
+                    <p>'.$res['M_Title'].' | '.$res['T_Name'].' | tanggal</p>
+                    <p>⭐ 5.0</p>
+                  </div>
+                  <img src="./source/images/qr-code.png" alt="" style="max-height: 250px; background-color:white;">
+                </div>
+              </div>
+              ';
+            }
+          }
+        
+        ?>
+
+        
+
+        
     </div>
 
 

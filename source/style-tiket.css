@@ -16,9 +16,18 @@ body{
     
 }
 .tiket_item{
-    background-color: aqua;
-    background: url(./images/ticket-clipart.png);
-    background-size: 100%;
-    
-    
+    background-color: #43184f;
+    border-radius: 10px;
+    border: 3px solid #772D8B;
+}
+
+.tiket-img{
+    background: url(./images/ticket-bg-2.jpg);
+    background-size: contain;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+}
+
+.inner-tiket p{
+    margin: 0;
 }
