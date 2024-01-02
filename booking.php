@@ -128,15 +128,9 @@
             <div>
                 <p style="font-weight: bolder;">Jam Tayang</p>
                 <div class="d-flex gap-3">
-                    <div class="p-1 px-2 time-item active-time">
-                        12.00
-                    </div>
-                    <div class="p-1 px-2 time-item">
-                        15.00
-                    </div>
-                    <div class="p-1 px-2 time-item">
-                        19.00
-                    </div>
+                    <div class="p-1 px-2 time-item active-time">12.00</div>
+                    <div class="p-1 px-2 time-item">15.00</div>
+                    <div class="p-1 px-2 time-item">19.00</div>
                 </div>
             </div>
           </div>
@@ -175,7 +169,7 @@
             
             <button type="button" id="purchaseBtn" class="btn-title" data-bs-toggle="modal" data-bs-target="#purchaseModal" data-bs-whatever="@mdo">Purchase</button>
 
-              <!-- Post Theatre Modal -->
+              <!-- Post Transaction Modal -->
               <div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -191,6 +185,9 @@
 
                           <label for="tipe" class="text-dark">Tipe Theatre</label>
                           <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="theatreType" id="theatreType" readonly>
+
+                          <label for="time" class="text-dark">Pilihan Waktu Tonton</label>
+                          <input class="px-2 py-2 rounded-3 bg-dark" type="text" name="watchTime" id="watchTime" readonly>
                           
                           <label for="seats" class="text-dark">Harga Satu Tiket</label>
                           <input class="px-2 py-2 rounded-3 bg-dark" name="t_price" id="t_price" readonly>
@@ -341,6 +338,7 @@
         var theatrePrice = $('.active-theatre > .col h5:nth-child(2)').text();
         var bioskopName = $('.active-theatre h5:nth-child(3)').text();
         var city = $('.active-theatre > h5:nth-child(4)').text(); 
+        var watchTime = $('.active-time').text();
         var numTickets = document.getElementById("chosenNumber").value;
         var method = document.getElementById("chosenMethod").value;
 
@@ -354,6 +352,7 @@
         document.getElementById('t_price').value = theatrePrice;
         document.getElementById('b_name').value = bioskopName;
         document.getElementById('ci_name').value = city;
+        document.getElementById('watchTime').value = watchTime;
         document.getElementById('numOfTicket').value = numTickets;
         document.getElementById('payMethod').value = method;
         document.getElementById('totalPrice').value = "Rp" + totalPrice;
