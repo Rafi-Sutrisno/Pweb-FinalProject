@@ -22,14 +22,22 @@
         // Mengambil data dari hasil query
         $row = $resT_ID->fetch_assoc();
         $t_id = $row['T_ID'];
+        $currStock = $row['T_Num_of_seat'];
+        $updateStock = $currStock - $numOfTicket;
 
-        
+        // Create new transaction
         $sql = "INSERT INTO transaksi (TR_MetodeBayar, TR_Tglbeli, TR_Num_of_tickets, Movies_M_ID, Theatre_T_ID, User_U_ID) 
             VALUE ('$payMethod', '$releasedate', '$numOfTicket', '$m_id', '$t_id', '$u_id')";
 
-        $query = mysqli_query($db, $sql);
+        // Update Ticket Stock
+        $decrease = "UPDATE theatre SET T_Num_of_seat='$updateStock' WHERE T_ID = '$t_id'";
 
-        if ($query){
+        // run query
+        $update = mysqli_query($db, $decrease);
+        
+        // if update stock success
+        if ($update){
+            $query = mysqli_query($db, $sql);
             header('Location: index.php?status=berhasil');
         } else {
             header('Location: index.php?status=gagal');
