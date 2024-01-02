@@ -122,11 +122,13 @@
                     <p>'.$res['M_Title'].' | '.$res['T_Name'].' | tanggal</p>
                     <p>⭐ 5.0</p>
                   </div>
-                  <img src="./source/images/qr-code.png" alt="" style="max-height: 250px; background-color:white;">
+                  <img src="./source/images/qr-code.png" alt="" style="max-height: 150px; background-color:white;">
                 </div>
               </div>
               ';
             }
+          }else{
+            echo'<h2 class="pt-5 w-100 text-center" style="color:gray">Login terlebih dahulu</h2>';
           }
         
         ?>
